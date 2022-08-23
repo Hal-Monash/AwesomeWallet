@@ -73,7 +73,7 @@ const TransactionPage = ({ navigation }) => {
       <View style={styles.twoColumnsContainer}>
         <View
           style={{
-            width: "90%",
+            width: "100%",
             height: 290,
             ...styles.shadow,
           }}
@@ -89,7 +89,7 @@ const TransactionPage = ({ navigation }) => {
             <View
               style={{
                 marginTop: SIZES.padding,
-                width: "90%",
+                width: "100%",
                 alignItems: "flex-end",
                 paddingHorizontal: SIZES.padding,
               }}
@@ -157,7 +157,6 @@ const TransactionPage = ({ navigation }) => {
             </View>
           </ImageBackground>
         </View>
-        <SidePanel></SidePanel>
       </View>
     );
   }
@@ -172,12 +171,17 @@ const TransactionPage = ({ navigation }) => {
     );
   }
   return (
-    <ScrollView>
-      <View style={{ flex: 1, paddingBottom: 130 }}>
-        {renderHeader()}
-        {renderTokenList()}
+    <View style={styles.twoColumnsContainer}>
+      <View style={styles.ContainerOne}>
+        <ScrollView>
+          <View style={{ flex: 1, paddingBottom: 130 }}>
+            {renderHeader()}
+            {renderTokenList()}
+          </View>
+        </ScrollView>
       </View>
-    </ScrollView>
+      <SidePanel></SidePanel>
+    </View>
   );
 };
 
@@ -222,7 +226,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   shadow: {
-    width: "90%",
+    width: "100%",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

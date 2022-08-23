@@ -18,6 +18,26 @@ const SidePanel = () => {
         <AntDesign name="folder1" size={30} color="#323232" />
         <View>Folder</View>
       </View>
+      <View style={styles.IconContainer}>
+        <MaterialCommunityIcons name="content-copy" size={30} color="#323232" />
+        <View>Copy</View>
+      </View>
+      <View style={styles.IconContainer}>
+        <MaterialCommunityIcons
+          name="content-paste"
+          size={30}
+          color="#323232"
+        />
+        <View>Paste</View>
+      </View>
+      <View style={styles.IconContainer}>
+        <MaterialCommunityIcons name="notebook" size={30} color="#323232" />
+        <View>Notebook</View>
+      </View>
+      <View style={styles.IconContainer}>
+        <MaterialCommunityIcons name="skip-next" size={30} color="#323232" />
+        <View>Next</View>
+      </View>
     </SafeAreaView>
   );
 };
