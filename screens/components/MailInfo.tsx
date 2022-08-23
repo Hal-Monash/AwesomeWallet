@@ -99,6 +99,24 @@ const MailInfo = ({ mail, mailIndex, navigation }) => {
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  twoColumnsContainer: {
+    flex: 1,
+    flexDirection: "row",
+    // // flexWrap: "wrap",
+    // // alignItems: "flex-start",
+  },
+  ContainerOne: {
+    flex: 1,
+    width: "90%",
+    // justifyContent: "center",
+    // alignItems: "center",
+  },
+  ContainerTwo: {
+    flex: 1,
+    width: "10%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   container: {
     paddingVertical: 10,
     display: "flex",

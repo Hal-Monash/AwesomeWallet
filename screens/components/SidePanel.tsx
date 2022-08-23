@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
   ContainerOne: { width: "90%" },
-  ContainerTwo: { width: "10%" },
+  ContainerTwo: { width: "10%", backgroundColor: "#FAF0E6" },
   IconContainer: { fontSize: 10, marginTop: 80, alignItems: "center" },
 });
 

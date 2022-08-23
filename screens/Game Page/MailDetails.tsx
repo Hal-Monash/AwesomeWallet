@@ -12,6 +12,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { StyleSheet } from "react-native";
 import { emailContent } from "../../constants/emailContent";
+import SidePanel from "../components/SidePanel";
 
 const MailDetails = ({ route, navigation }) => {
   const state = emailContent;
@@ -77,7 +78,7 @@ const MailDetails = ({ route, navigation }) => {
 
   return (
     <View style={styles.twoColumnsContainer}>
-      <SafeAreaView style={(styles.container, styles.ContainerOne)}>
+      <View style={styles.ContainerOne}>
         <Header />
         <View style={styles.bodyWrapper}>
           <View style={styles.mailSubjectSection}>
@@ -192,40 +193,35 @@ const MailDetails = ({ route, navigation }) => {
             )}
           </View>
         </View>
-      </SafeAreaView>
-      <SafeAreaView style={styles.ContainerTwo}>
-        <View style={styles.IconContainer}>
-          <MaterialCommunityIcons
-            name="cellphone-screenshot"
-            size={30}
-            color="#323232"
-          />
-          <View>Screen Shot</View>
-        </View>
-        <View style={styles.IconContainer}>
-          <AntDesign name="folder1" size={30} color="#323232" />
-          <View>Folder</View>
-        </View>
-      </SafeAreaView>
+      </View>
+      <SidePanel></SidePanel>
+      {/*<SafeAreaView style={styles.ContainerTwo}>*/}
+      {/*  <View style={styles.IconContainer}>*/}
+      {/*    <MaterialCommunityIcons*/}
+      {/*      name="cellphone-screenshot"*/}
+      {/*      size={30}*/}
+      {/*      color="#323232"*/}
+      {/*    />*/}
+      {/*    <View>Screen Shot</View>*/}
+      {/*  </View>*/}
+      {/*  <View style={styles.IconContainer}>*/}
+      {/*    <AntDesign name="folder1" size={30} color="#323232" />*/}
+      {/*    <View>Folder</View>*/}
+      {/*  </View>*/}
+      {/*</SafeAreaView>*/}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-    width: null,
-    height: null,
-    resizeMode: "stretch",
-  },
   twoColumnsContainer: {
     flex: 1,
     flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "flex-start",
+    // flexWrap: "wrap",
+    // alignItems: "flex-start",
   },
   ContainerOne: { width: "90%" },
-  ContainerTwo: { width: "10%" },
+  ContainerTwo: { fix: 1, width: "10%" },
   IconContainer: { fontSize: 10, marginTop: 80 },
   container: {
     flex: 1,

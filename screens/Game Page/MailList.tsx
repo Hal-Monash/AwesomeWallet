@@ -31,9 +31,9 @@ const MailList = ({ navigation, route }) => {
     navigation?.openDrawer();
   };
 
-  const handleNavigation = (screen, params) => {
-    navigation.navigate(getScreenParent(screen), screen, params);
-  };
+  // const handleNavigation = (screen, params) => {
+  //   navigation.navigate(getScreenParent(screen), screen, params);
+  // };
 
   const onScroll = ({ contentOffset }) => {
     if (contentOffset.y > 5) {
@@ -71,32 +71,31 @@ const MailList = ({ navigation, route }) => {
     );
   };
 
-  const ComposeButton = () => {
-    const { isScrollingUp } = data;
-    return (
-      <TouchableOpacity
-        style={[
-          styles.composeButton,
-          isScrollingUp
-            ? styles.composeButtonRound
-            : styles.composeButtonCurved,
-        ]}
-        // onPress={() => handleNavigation("Compose")}
-      >
-        <Feather
-          name="edit-2"
-          size={20}
-          color="#D93025"
-          style={styles.menuIcon}
-        />
-        <TransitionText animationStyle="slideInRight">
-          {!isScrollingUp ? (
-            <Text style={styles.composeText}>Compose</Text>
-          ) : null}
-        </TransitionText>
-      </TouchableOpacity>
-    );
-  };
+  // const ComposeButton = () => {
+  //   const { isScrollingUp } = data;
+  //   return (
+  //     <TouchableOpacity
+  //       style={[
+  //         styles.composeButton,
+  //         isScrollingUp
+  //           ? styles.composeButtonRound
+  //           : styles.composeButtonCurved,
+  //       ]}
+  //     >
+  //       <Feather
+  //         name="edit-2"
+  //         size={20}
+  //         color="#D93025"
+  //         style={styles.menuIcon}
+  //       />
+  //       <TransitionText animationStyle="slideInRight">
+  //         {!isScrollingUp ? (
+  //           <Text style={styles.composeText}>Compose</Text>
+  //         ) : null}
+  //       </TransitionText>
+  //     </TouchableOpacity>
+  //   );
+  // };
 
   const EmptyListComponent = () => {
     return (
@@ -109,10 +108,9 @@ const MailList = ({ navigation, route }) => {
 
   return (
     <View style={styles.twoColumnsContainer}>
-      <SafeAreaView style={(styles.container, styles.ContainerOne)}>
+      <View style={(styles.container, styles.ContainerOne)}>
         <View style={styles.content}>
           <Header toggleDrawer={() => handleDrawer()} />
-          {/*<Text style={styles.screenTitle}>{screenTitle}</Text>*/}
           <Text style={styles.screenTitle}>"screenTitle"</Text>
           {getMails().length > 0 ? (
             <FlatList
@@ -131,10 +129,8 @@ const MailList = ({ navigation, route }) => {
             <EmptyListComponent />
           )}
         </View>
-        {/*<ComposeButton />*/}
-        {/*<BottomTab navigateToRoute={(screen) => handleNavigation(screen)} />*/}
         <BottomTab toggleDrawer={undefined} />
-      </SafeAreaView>
+      </View>
       <SidePanel />
     </View>
   );
@@ -144,8 +140,6 @@ const styles = StyleSheet.create({
   twoColumnsContainer: {
     flex: 1,
     flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "flex-start",
   },
   ContainerOne: { width: "90%" },
   ContainerTwo: { width: "10%" },
