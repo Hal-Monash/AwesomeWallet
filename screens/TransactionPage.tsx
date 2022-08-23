@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import TokenList from "../parts/TokenList";
 import { newDummyData, COLORS, SIZES, FONTS, icons, images } from "../index";
+import SidePanel from "./components/SidePanel";
 
 const TransactionPage = ({ navigation }) => {
   const [functions, setFunctions] = React.useState(newDummyData.multiFunctions);
@@ -69,91 +70,94 @@ const TransactionPage = ({ navigation }) => {
     );
 
     return (
-      <View
-        style={{
-          width: "100%",
-          height: 290,
-          ...styles.shadow,
-        }}
-      >
-        <ImageBackground
-          source={images.banner}
-          resizeMode="cover"
+      <View style={styles.twoColumnsContainer}>
+        <View
           style={{
-            flex: 1,
-            alignItems: "center",
+            width: "90%",
+            height: 290,
+            ...styles.shadow,
           }}
         >
-          <View
+          <ImageBackground
+            source={images.banner}
+            resizeMode="cover"
             style={{
-              marginTop: SIZES.padding,
-              width: "100%",
-              alignItems: "flex-end",
-              paddingHorizontal: SIZES.padding,
+              flex: 1,
+              alignItems: "center",
             }}
           >
-            <TouchableOpacity
+            <View
               style={{
-                width: 35,
-                height: 35,
+                marginTop: SIZES.padding,
+                width: "90%",
+                alignItems: "flex-end",
+                paddingHorizontal: SIZES.padding,
+              }}
+            >
+              <TouchableOpacity
+                style={{
+                  width: 35,
+                  height: 35,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                onPress={() => navigation.navigate("List")}
+              >
+                <Image
+                  source={icons.notification_white}
+                  resizeMode="contain"
+                  style={{ flex: 1 }}
+                />
+              </TouchableOpacity>
+            </View>
+            {/* Balance */}
+            <View
+              style={{
                 alignItems: "center",
                 justifyContent: "center",
               }}
-              onPress={() => navigation.navigate("List")}
             >
-              <Image
-                source={icons.notification_white}
-                resizeMode="contain"
-                style={{ flex: 1 }}
+              <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
+                Your Portfolio Balance
+              </Text>
+              <Text
+                style={{
+                  marginTop: SIZES.base,
+                  color: COLORS.white,
+                  ...FONTS.h1,
+                }}
+              >
+                ${newDummyData.portfolio.balance}
+              </Text>
+              <Text
+                style={{
+                  color: COLORS.white,
+                  ...FONTS.body5,
+                }}
+              >
+                +{newDummyData.portfolio.changes}% Last 24 hours
+              </Text>
+            </View>
+            <View
+              style={{
+                position: "absolute",
+                bottom: "-15%",
+              }}
+            >
+              <FlatList
+                contentContainerStyle={{
+                  marginTop: SIZES.base,
+                }}
+                data={functions}
+                renderItem={renderItem}
+                keyExtractor={(item) => `${item.id}`}
+                horizontal
+                showsHorizontalScrollIndicator={false}
               />
-            </TouchableOpacity>
-          </View>
-          {/* Balance */}
-          <View
-            style={{
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
-              Your Portfolio Balance
-            </Text>
-            <Text
-              style={{
-                marginTop: SIZES.base,
-                color: COLORS.white,
-                ...FONTS.h1,
-              }}
-            >
-              ${newDummyData.portfolio.balance}
-            </Text>
-            <Text
-              style={{
-                color: COLORS.white,
-                ...FONTS.body5,
-              }}
-            >
-              +{newDummyData.portfolio.changes}% Last 24 hours
-            </Text>
-          </View>
-          <View
-            style={{
-              position: "absolute",
-              bottom: "-15%",
-            }}
-          >
-            <FlatList
-              contentContainerStyle={{
-                marginTop: SIZES.base,
-              }}
-              data={functions}
-              renderItem={renderItem}
-              keyExtractor={(item) => `${item.id}`}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-            />
-          </View>
-        </ImageBackground>
+            </View>
+          </ImageBackground>
+        </View>
+        <SidePanel></SidePanel>
       </View>
     );
   }
@@ -178,6 +182,24 @@ const TransactionPage = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  twoColumnsContainer: {
+    flex: 1,
+    flexDirection: "row",
+    // flexWrap: "wrap",
+    // alignItems: "flex-start",
+  },
+  ContainerOne: {
+    flex: 1,
+    width: "90%",
+    justifyContent: "center",
+    // alignItems: "center",
+  },
+  ContainerTwo: {
+    flex: 1,
+    width: "10%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   container: {
     flex: 1,
     alignItems: "center",
@@ -200,6 +222,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   shadow: {
+    width: "90%",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

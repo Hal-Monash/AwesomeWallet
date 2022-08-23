@@ -96,8 +96,9 @@ const TokenList = ({ navigation, customContainerStyle, history }) => {
   return (
     <View
       style={{
+        width: "90%",
         marginTop: 60,
-        marginHorizontal: SIZES.padding,
+        marginHorizontal: 5,
         marginVertical: SIZES.padding - 90,
         padding: 20,
         borderRadius: SIZES.radius,
@@ -117,7 +118,7 @@ const TokenList = ({ navigation, customContainerStyle, history }) => {
           return (
             <View
               style={{
-                width: "100%",
+                width: "90%",
                 height: 1,
                 backgroundColor: COLORS.lightGray,
               }}

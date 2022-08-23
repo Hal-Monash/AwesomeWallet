@@ -3,6 +3,7 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import PhraseBackup from "../parts/PhraseBackup";
+import SidePanel from "./components/SidePanel";
 
 const BackUpPhrase = ({ navigation }: any) => {
   const [data, setData] = useState([
@@ -70,82 +71,91 @@ const BackUpPhrase = ({ navigation }: any) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={[styles.description, { fontSize: 20 }]}>
-        React Native Metamask Phrase Word Example
-      </Text>
-      <Text style={styles.description}>
-        Select each word in the order it was presented to you.
-      </Text>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-          flexWrap: "wrap",
-          marginBottom: 30,
-        }}
-      >
-        {displayArr.map((index) => (
-          <View key={index} style={[styles.displayItemContainer]}>
-            <Text style={{ marginRight: 3 }}>{index + 1}.</Text>
-            <TouchableOpacity
-              style={
-                index < selected.length && selected[index]
-                  ? styles.displaySelectedButton
-                  : styles.displayButton
-              }
-              onPress={() => {
-                if (index < selected.length && selected[index]) {
-                  setSelected((prevState) => {
-                    return filter(prevState, (x) => x !== selected[index]);
-                  });
-                }
-              }}
-            >
-              <Text style={styles.buttonText}>
-                {index < selected.length && selected[index]}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        ))}
-      </View>
-      <PhraseBackup selected={selected} data={data} onChange={onSelect} />
-      {arraysAreIdentical(selected, [
-        "Mouse",
-        "Believe",
-        "Walnut",
-        "Slave",
-        "Sporadically",
-        "Family",
-        "Skin",
-        "Lobster",
-        "Friend",
-        "Intact",
-        "Twenty",
-        "Camera",
-      ]) && (
-        <TouchableOpacity
+    <View style={styles.twoColumnsContainer}>
+      <View style={styles.container}>
+        <Text style={[styles.description, { fontSize: 20 }]}>
+          React Native Metamask Phrase Word Example
+        </Text>
+        <Text style={styles.description}>
+          Select each word in the order it was presented to you.
+        </Text>
+        <View
           style={{
-            width: 320,
-            height: 40,
-            borderWidth: 1,
-            borderColor: "#000",
-            borderRadius: 18,
-            marginTop: 20,
-            alignItems: "center",
+            flexDirection: "row",
             justifyContent: "center",
+            alignItems: "center",
+            flexWrap: "wrap",
+            marginBottom: 30,
           }}
-          onPress={() => navigation.navigate("Your Home Page")}
         >
-          <Text style={{ fontWeight: "500" }}>Complete Backup</Text>
-        </TouchableOpacity>
-      )}
+          {displayArr.map((index) => (
+            <View key={index} style={[styles.displayItemContainer]}>
+              <Text style={{ marginRight: 3 }}>{index + 1}.</Text>
+              <TouchableOpacity
+                style={
+                  index < selected.length && selected[index]
+                    ? styles.displaySelectedButton
+                    : styles.displayButton
+                }
+                onPress={() => {
+                  if (index < selected.length && selected[index]) {
+                    setSelected((prevState) => {
+                      return filter(prevState, (x) => x !== selected[index]);
+                    });
+                  }
+                }}
+              >
+                <Text style={styles.buttonText}>
+                  {index < selected.length && selected[index]}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ))}
+        </View>
+        <PhraseBackup selected={selected} data={data} onChange={onSelect} />
+        {arraysAreIdentical(selected, [
+          "Mouse",
+          "Believe",
+          "Walnut",
+          "Slave",
+          "Sporadically",
+          "Family",
+          "Skin",
+          "Lobster",
+          "Friend",
+          "Intact",
+          "Twenty",
+          "Camera",
+        ]) && (
+          <TouchableOpacity
+            style={{
+              width: 320,
+              height: 40,
+              borderWidth: 1,
+              borderColor: "#000",
+              borderRadius: 18,
+              marginTop: 20,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            onPress={() => navigation.navigate("Your Home Page")}
+          >
+            <Text style={{ fontWeight: "500" }}>Complete Backup</Text>
+          </TouchableOpacity>
+        )}
+      </View>
+      <SidePanel></SidePanel>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  twoColumnsContainer: {
+    flex: 1,
+    flexDirection: "row",
+    // flexWrap: "wrap",
+    // alignItems: "flex-start",
+  },
   buttonText: {
     justifyContent: "center",
   },

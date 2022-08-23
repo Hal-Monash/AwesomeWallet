@@ -15,6 +15,7 @@ import Receive from "./screens/Receive";
 import MailDetails from "./screens/Game Page/MailDetails";
 import PhonePage from "./screens/Game Page/PhonePage";
 import MailList from "./screens/Game Page/MailList";
+import { View } from "react-native";
 
 const Stack = createNativeStackNavigator();
 

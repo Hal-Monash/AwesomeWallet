@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { COLORS, SIZES, FONTS } from "../constants/theme";
 import { newDummyData } from "../index";
 import { multiCoinStatus } from "../constants/newDummy";
+import SidePanel from "./components/SidePanel";
 
 const Withdraw = ({ route }) => {
   const [transactionFee, setTransactionFee] = useState("");
@@ -24,15 +25,9 @@ const Withdraw = ({ route }) => {
       +newDummyData.multiCoinStatus[sequence.indexOf(currencyItem)].audPrice;
     if (temp1 == 0) temp1 = null;
     if (temp2 == 0) temp2 = null;
-    // if (temp == NaN) temp = null;
-    // if (e1.toString() == transactionFee) {
     setTransactionFeeAud(String(temp1));
-    //   setCurrentCurrency("AUD");
-    // }
-    // if (e2.toString() == sendCrypto) {
     setSendAud(String(temp2));
     setCurrentCurrency("AUD");
-    // }
   };
   const onSendOut = () => {
     if (currentCurrency == "AUD") {
@@ -40,6 +35,22 @@ const Withdraw = ({ route }) => {
       const currentDeposit =
         +newDummyData.multiCoinStatus[sequence.indexOf(currencyItem)].AUD;
       if (togetherAud <= currentDeposit) {
+        console.log("Congratulations!");
+        // Alert.alert("Congratulations!", "Money Send Out", [
+        //   { text: "OK", onPress: () => console.log("OK Pressed") },
+        // ]);
+      } else {
+        console.log("Failed!");
+        // Alert.alert("Transaction Failed!", "You dont have enough money", [
+        //   { text: "OK", onPress: () => console.log("OK Pressed") },
+        // ]);
+      }
+    } else {
+      const together = +transactionFee + +sendCrypto;
+      const currentDeposit =
+        +newDummyData.multiCoinStatus[sequence.indexOf(currencyItem)].amount;
+      console.log(currentDeposit);
+      if (together <= currentDeposit) {
         console.log("Congratulations!");
         // Alert.alert("Congratulations!", "Money Send Out", [
         //   { text: "OK", onPress: () => console.log("OK Pressed") },
@@ -69,140 +80,164 @@ const Withdraw = ({ route }) => {
   };
 
   return (
-    <View
-      style={{
-        marginTop: SIZES.padding,
-        marginHorizontal: SIZES.padding,
-        padding: SIZES.padding,
-        borderRadius: SIZES.radius,
-        backgroundColor: COLORS.white,
-        ...styles.shadow,
-      }}
-    >
-      <Form layout="horizontal">
-        <View>
-          <Form.Item
-            extra={
-              <div>
-                <a>PASTE</a>
-              </div>
-            }
-          >
-            <Input placeholder="Recipient Address" clearable />
-          </Form.Item>
-        </View>
-        {currentCurrency != "AUD" && (
+    <View style={styles.twoColumnsContainer}>
+      <View
+        style={{
+          width: "80%",
+          marginTop: SIZES.padding,
+          // marginHorizontal: SIZES.padding,
+          marginLeft: SIZES.padding,
+          marginRight: 12,
+          padding: SIZES.padding,
+          borderRadius: SIZES.radius,
+          backgroundColor: COLORS.white,
+          ...styles.shadow,
+        }}
+      >
+        <Form layout="horizontal">
           <View>
             <Form.Item
               extra={
                 <div>
-                  <a style={{ marginRight: 20 }}>MAX </a>
-                  <a
-                    onClick={() => {
-                      onTransToAud(transactionFee, sendCrypto);
-                    }}
-                  >
-                    {currentCurrency}
-                  </a>
+                  <a>PASTE</a>
                 </div>
               }
             >
-              <Input
-                type={"number"}
-                placeholder="Amount"
-                clearable
-                value={sendCrypto}
-                onChange={(e) => setSendCrypto(e)}
-              />
+              <Input placeholder="Recipient Address" clearable />
             </Form.Item>
           </View>
-        )}
-        {currentCurrency == "AUD" && (
+          {currentCurrency != "AUD" && (
+            <View>
+              <Form.Item
+                extra={
+                  <div>
+                    <a style={{ marginRight: 20 }}>MAX </a>
+                    <a
+                      onClick={() => {
+                        onTransToAud(transactionFee, sendCrypto);
+                      }}
+                    >
+                      {currentCurrency}
+                    </a>
+                  </div>
+                }
+              >
+                <Input
+                  type={"number"}
+                  placeholder="Amount"
+                  clearable
+                  value={sendCrypto}
+                  onChange={(e) => setSendCrypto(e)}
+                />
+              </Form.Item>
+            </View>
+          )}
+          {currentCurrency == "AUD" && (
+            <View>
+              <Form.Item
+                extra={
+                  <div>
+                    <a style={{ marginRight: 20 }}>MAX </a>
+                    <a
+                      onClick={() => {
+                        onTransToCrypto(sendCrypto);
+                      }}
+                    >
+                      {currentCurrency}
+                    </a>
+                  </div>
+                }
+              >
+                <Input
+                  placeholder="Amount"
+                  clearable
+                  type={"number"}
+                  value={sendAud}
+                  onChange={(e) => setSendAud(e)}
+                />
+              </Form.Item>
+            </View>
+          )}
+          {currentCurrency != "AUD" && (
+            <View>
+              <Form.Item
+                extra={
+                  <div>
+                    <a
+                      onClick={() => {
+                        onTransToAud(transactionFee, sendCrypto);
+                      }}
+                    >
+                      {currentCurrency}
+                    </a>
+                  </div>
+                }
+              >
+                <Input
+                  placeholder="Transaction Fee"
+                  clearable
+                  type={"number"}
+                  onChange={(e) => setTransactionFee(e)}
+                  value={transactionFee}
+                />
+              </Form.Item>
+            </View>
+          )}
+          {currentCurrency == "AUD" && (
+            <View>
+              <Form.Item
+                extra={
+                  <div>
+                    <a onClick={() => onTransToCrypto(transactionFee)}>AUD</a>
+                  </div>
+                }
+              >
+                <Input
+                  placeholder="Transaction Fee"
+                  clearable
+                  type={"number"}
+                  onChange={(e) => setTransactionFeeAud(e)}
+                  value={transactionFeeAud}
+                />
+              </Form.Item>
+            </View>
+          )}
           <View>
-            <Form.Item
-              extra={
-                <div>
-                  <a style={{ marginRight: 20 }}>MAX </a>
-                  <a
-                    onClick={() => {
-                      onTransToCrypto(sendCrypto);
-                    }}
-                  >
-                    {currentCurrency}
-                  </a>
-                </div>
-              }
-            >
-              <Input
-                placeholder="Amount"
-                clearable
-                type={"number"}
-                value={sendAud}
-                onChange={(e) => setSendAud(e)}
-              />
+            <Form.Item>
+              <TouchableOpacity
+                onPress={() => onSendOut()}
+                style={[styles.button, { backgroundColor: "#023e3f" }]}
+              >
+                <Text style={styles.buttonText}>Submit</Text>
+              </TouchableOpacity>
             </Form.Item>
           </View>
-        )}
-        {currentCurrency != "AUD" && (
-          <View>
-            <Form.Item
-              extra={
-                <div>
-                  <a
-                    onClick={() => {
-                      onTransToAud(transactionFee, sendCrypto);
-                    }}
-                  >
-                    {currentCurrency}
-                  </a>
-                </div>
-              }
-            >
-              <Input
-                placeholder="Transaction Fee"
-                clearable
-                type={"number"}
-                onChange={(e) => setTransactionFee(e)}
-                value={transactionFee}
-              />
-            </Form.Item>
-          </View>
-        )}
-        {currentCurrency == "AUD" && (
-          <View>
-            <Form.Item
-              extra={
-                <div>
-                  <a onClick={() => onTransToCrypto(transactionFee)}>AUD</a>
-                </div>
-              }
-            >
-              <Input
-                placeholder="Transaction Fee"
-                clearable
-                type={"number"}
-                onChange={(e) => setTransactionFeeAud(e)}
-                value={transactionFeeAud}
-              />
-            </Form.Item>
-          </View>
-        )}
-        <View>
-          <Form.Item>
-            <TouchableOpacity
-              onPress={() => onSendOut()}
-              style={[styles.button, { backgroundColor: "#023e3f" }]}
-            >
-              <Text style={styles.buttonText}>Submit</Text>
-            </TouchableOpacity>
-          </Form.Item>
-        </View>
-      </Form>
+        </Form>
+      </View>
+      <SidePanel></SidePanel>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  twoColumnsContainer: {
+    flex: 1,
+    flexDirection: "row",
+    // // flexWrap: "wrap",
+    // // alignItems: "flex-start",
+  },
+  ContainerOne: {
+    flex: 1,
+    width: "90%",
+    justifyContent: "center",
+    // alignItems: "center",
+  },
+  ContainerTwo: {
+    flex: 1,
+    width: "10%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   shadow: {
     shadowColor: "#000",
     shadowOffset: {

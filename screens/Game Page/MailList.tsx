@@ -17,6 +17,7 @@ import getScreenParent from "../components/ScreenParent";
 import combineData from "../components/dataHelper";
 import { StyleSheet } from "react-native";
 import { emailContent } from "../../constants/emailContent";
+import SidePanel from "../components/SidePanel";
 
 const MailList = ({ navigation, route }) => {
   const screenTitle = route.params?.screenTitle;
@@ -107,36 +108,47 @@ const MailList = ({ navigation, route }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        <Header toggleDrawer={() => handleDrawer()} />
-        {/*<Text style={styles.screenTitle}>{screenTitle}</Text>*/}
-        <Text style={styles.screenTitle}>"screenTitle"</Text>
-        {getMails().length > 0 ? (
-          <FlatList
-            data={getMails()}
-            keyExtractor={(item, index) => shortid.generate()}
-            renderItem={renderMailInfo}
-            horizontal={false}
-            showsVerticalScrollIndicator={false}
-            style={styles.flatList}
-            onScroll={({ nativeEvent }) => {
-              onScroll(nativeEvent);
-            }}
-            scrollEventThrottle={400}
-          />
-        ) : (
-          <EmptyListComponent />
-        )}
-      </View>
-      {/*<ComposeButton />*/}
-      {/*<BottomTab navigateToRoute={(screen) => handleNavigation(screen)} />*/}
-      <BottomTab toggleDrawer={undefined} />
-    </SafeAreaView>
+    <View style={styles.twoColumnsContainer}>
+      <SafeAreaView style={(styles.container, styles.ContainerOne)}>
+        <View style={styles.content}>
+          <Header toggleDrawer={() => handleDrawer()} />
+          {/*<Text style={styles.screenTitle}>{screenTitle}</Text>*/}
+          <Text style={styles.screenTitle}>"screenTitle"</Text>
+          {getMails().length > 0 ? (
+            <FlatList
+              data={getMails()}
+              keyExtractor={(item, index) => shortid.generate()}
+              renderItem={renderMailInfo}
+              horizontal={false}
+              showsVerticalScrollIndicator={false}
+              style={styles.flatList}
+              onScroll={({ nativeEvent }) => {
+                onScroll(nativeEvent);
+              }}
+              scrollEventThrottle={400}
+            />
+          ) : (
+            <EmptyListComponent />
+          )}
+        </View>
+        {/*<ComposeButton />*/}
+        {/*<BottomTab navigateToRoute={(screen) => handleNavigation(screen)} />*/}
+        <BottomTab toggleDrawer={undefined} />
+      </SafeAreaView>
+      <SidePanel />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  twoColumnsContainer: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "flex-start",
+  },
+  ContainerOne: { width: "90%" },
+  ContainerTwo: { width: "10%" },
   container: {
     flex: 1,
     backgroundColor: "#fff",

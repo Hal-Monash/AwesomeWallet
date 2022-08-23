@@ -10,6 +10,7 @@ import {
 import { HeaderBar, CurrencyLabel, TextButton } from "../parts";
 import { COLORS, SIZES, FONTS } from "../constants/theme";
 import TransactionHistory from "../parts/TransactionHistory";
+import SidePanel from "./components/SidePanel";
 
 const BitcoinDetails = ({ route, navigation }) => {
   const [selectedCurrency, setSelectedCurrency] = React.useState(null);
@@ -90,19 +91,40 @@ const BitcoinDetails = ({ route, navigation }) => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      {/*<HeaderBar right={true} />*/}
-      <ScrollView>
-        <View style={{ flex: 1, paddingBottom: SIZES.padding }}>
-          {renderTrade()}
-          {renderTransactionHistory()}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <View style={styles.twoColumnsContainer}>
+      <SafeAreaView style={{ flex: 1 }}>
+        {/*<HeaderBar right={true} />*/}
+        <ScrollView>
+          <View style={{ flex: 1, paddingBottom: SIZES.padding }}>
+            {renderTrade()}
+            {renderTransactionHistory()}
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+      <SidePanel></SidePanel>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  twoColumnsContainer: {
+    flex: 1,
+    flexDirection: "row",
+    // flexWrap: "wrap",
+    // alignItems: "flex-start",
+  },
+  ContainerOne: {
+    flex: 1,
+    width: "90%",
+    justifyContent: "center",
+    // alignItems: "center",
+  },
+  ContainerTwo: {
+    flex: 1,
+    width: "10%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   buttonContainer: {
     flexDirection: "row",
     marginHorizontal: 24,

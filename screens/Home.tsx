@@ -12,6 +12,7 @@ import {
   ScrollView,
   PixelRatio,
 } from "react-native";
+import SidePanel from "./components/SidePanel";
 
 const Home = ({ navigation }) => {
   const [sliderState, setSliderState] = useState({ currentPage: 0 });
@@ -31,9 +32,8 @@ const Home = ({ navigation }) => {
   const { currentPage: pageIndex } = sliderState;
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={{ flex: 1 }}>
+    <View style={styles.twoColumnsContainer}>
+      <SafeAreaView style={[styles.ContainerOne]}>
         <ScrollView
           style={{ flex: 1 }}
           horizontal={true}
@@ -132,11 +132,31 @@ const Home = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </SafeAreaView>
-    </>
+      <SidePanel></SidePanel>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  twoColumnsContainer: {
+    flex: 1,
+    flexDirection: "row",
+    // flexWrap: "wrap",
+    // alignItems: "flex-start",
+  },
+  ContainerOne: {
+    flex: 1,
+    width: "90%",
+    justifyContent: "center",
+    // alignItems: "center",
+  },
+  ContainerTwo: {
+    flex: 1,
+    width: "10%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  IconContainer: { fontSize: 10, marginTop: 80 },
   paginationWrapper: {
     position: "absolute",
     bottom: 200,
@@ -163,7 +183,11 @@ const styles = StyleSheet.create({
     marginVertical: 30,
   },
   header: {
-    fontSize: 30,
+    textAlignVertical: "center",
+    textAlign: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
+    fontSize: 25,
     fontWeight: "bold",
     marginBottom: 20,
   },
