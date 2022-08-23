@@ -1,8 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import dummyData from "../constants/dummy";
+import { useNavigation } from "@react-navigation/native";
 import { COLORS } from "../constants/theme";
 import { SIZES } from "../constants/theme";
 import { FONTS } from "../constants/theme";

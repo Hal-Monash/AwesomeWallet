@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
-import AuthContext from "../components/AuthContext";
 
 const BottomTab = () => {
   const { state, dispatch } = useContext({

@@ -1,12 +1,9 @@
 import React from "react";
 
 import { View, Image, Text, Vibration } from "react-native";
-
-import dummyData from "../constants/dummy";
 import { COLORS } from "../constants/theme";
 import { SIZES } from "../constants/theme";
 import { FONTS } from "../constants/theme";
-import icons from "../constants/icons";
 
 const CurrencyLabel = ({ icon, currency, code }) => {
   return (

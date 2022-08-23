@@ -1,19 +1,10 @@
 import React, { useContext, useState } from "react";
-import {
-  SafeAreaView,
-  Text,
-  FlatList,
-  View,
-  TouchableOpacity,
-} from "react-native";
+import { Text, FlatList, View, TouchableOpacity } from "react-native";
 import shortid from "shortid";
-import Feather from "react-native-vector-icons/Feather";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Header from "../components/Header";
 import MailInfo from "../components/MailInfo";
 import BottomTab from "../components/Header";
-import TransitionText from "../components/TransitionText";
-import getScreenParent from "../components/ScreenParent";
 import combineData from "../components/dataHelper";
 import { StyleSheet } from "react-native";
 import { emailContent } from "../../constants/emailContent";
