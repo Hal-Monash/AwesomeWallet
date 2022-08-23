@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input } from "antd-mobile";
+import { Form, Input, Button } from "antd-mobile";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { COLORS, SIZES, FONTS } from "../constants/theme";
 import { newDummyData } from "../index";
@@ -202,6 +202,59 @@ const Withdraw = ({ route }) => {
               </Form.Item>
             </View>
           )}
+          <View style={styles.twoColumnsContainer}>
+            <Form.Item>
+              <Text style={styles.titleText}>
+                Transaction Fee Recommendations:{"\n"}
+              </Text>
+              <Text style={styles.explainText}>
+                Transaction Fee is fully decided by the Chain, no fee will be
+                charged by the app{"\n"}
+              </Text>
+              <Button
+                color="primary"
+                style={styles.buttonSmall}
+                size="small"
+                onClick={() => {
+                  alert("hello.");
+                }}
+              >
+                Low
+              </Button>
+              <Text style={styles.explainText}>
+                {"   "}
+                Low Transaction Fee, Long Waiting Time
+              </Text>
+              <Button
+                color="primary"
+                style={styles.buttonSmall}
+                size="small"
+                onClick={() => {
+                  alert("hello.");
+                }}
+              >
+                Medium
+              </Button>
+              <Text style={styles.explainText}>
+                {"   "}
+                Average Transaction Fee, Average Waiting Time
+              </Text>
+              <Button
+                color="primary"
+                style={styles.buttonSmall}
+                size="small"
+                onClick={() => {
+                  alert("hello.");
+                }}
+              >
+                High
+              </Button>
+              <Text style={styles.explainText}>
+                {"   "}
+                Fast Transaction Fee, Short Waiting Time
+              </Text>
+            </Form.Item>
+          </View>
           <View>
             <Form.Item>
               <TouchableOpacity
@@ -256,6 +309,22 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "600",
     textAlign: "center",
+  },
+  buttonSmall: {
+    marginBottom: 20,
+    padding: 30,
+  },
+  space: {
+    width: 20, // or whatever size you need
+    height: 20,
+  },
+  explainText: {
+    fontSize: 10,
+    // fontWeight: "bold",
+  },
+  titleText: {
+    fontSize: 15,
+    fontWeight: "bold",
   },
 });
 

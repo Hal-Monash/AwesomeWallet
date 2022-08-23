@@ -2,7 +2,8 @@ import React, { CSSProperties } from "react";
 import { List, Image } from "antd-mobile";
 import { List as VirtualizedList, AutoSizer } from "react-virtualized";
 import newDummy from "../constants/newDummy";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import SidePanel from "./components/SidePanel";
 
 const CoinList = ({ route, navigation }) => {
   const dataToUse = newDummy.multiCoinStatus;
@@ -62,23 +63,47 @@ const CoinList = ({ route, navigation }) => {
   };
 
   return (
-    <View>
-      <List>
-        <AutoSizer disableHeight>
-          {({ width }: { width: number }) => (
-            <VirtualizedList
-              rowCount={5}
-              rowRenderer={getRowRenderer()}
-              width={width}
-              height={300}
-              rowHeight={60}
-              overscanRowCount={10}
-            />
-          )}
-        </AutoSizer>
-      </List>
+    <View style={styles.twoColumnsContainer}>
+      <View style={styles.ContainerOne}>
+        <List>
+          <AutoSizer disableHeight>
+            {({ width }: { width: number }) => (
+              <VirtualizedList
+                rowCount={5}
+                rowRenderer={getRowRenderer()}
+                width={width}
+                height={300}
+                rowHeight={60}
+                overscanRowCount={10}
+              />
+            )}
+          </AutoSizer>
+        </List>
+      </View>
+      <SidePanel></SidePanel>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  twoColumnsContainer: {
+    flex: 1,
+    flexDirection: "row",
+    // // flexWrap: "wrap",
+    // // alignItems: "flex-start",
+  },
+  ContainerOne: {
+    flex: 1,
+    width: "90%",
+    // justifyContent: "center",
+    // alignItems: "center",
+  },
+  ContainerTwo: {
+    flex: 1,
+    width: "10%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 export default CoinList;
