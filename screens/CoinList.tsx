@@ -1,12 +1,12 @@
 import React, { CSSProperties } from "react";
 import { List, Image } from "antd-mobile";
 import { List as VirtualizedList, AutoSizer } from "react-virtualized";
-import newDummy from "../constants/newDummy";
+import accountOne from "../constants/accountOne";
 import { StyleSheet, View } from "react-native";
 import SidePanel from "./components/SidePanel";
 
 const CoinList = ({ route, navigation }) => {
-  const dataToUse = newDummy.multiCoinStatus;
+  const dataToUse = accountOne.multiCoinStatus;
   const { currentItem } = route.params;
   const getRowRenderer = () => {
     const navigationReceiveSelect = (item) => {

@@ -11,13 +11,13 @@ import {
   LogBox,
 } from "react-native";
 import TokenList from "../parts/TokenList";
-import { newDummyData, COLORS, SIZES, FONTS, icons, images } from "../index";
+import { accountOne, COLORS, SIZES, FONTS, icons, images } from "../index";
 import SidePanel from "./components/SidePanel";
 
 const TransactionPage = ({ navigation }) => {
-  const [functions, setFunctions] = React.useState(newDummyData.multiFunctions);
+  const [functions, setFunctions] = React.useState(accountOne.multiFunctions);
   const [TokenLists, setTokenLists] = React.useState(
-    newDummyData.multiCoinStatus
+    accountOne.multiCoinStatus
   );
 
   React.useEffect(() => {
@@ -127,7 +127,7 @@ const TransactionPage = ({ navigation }) => {
                   ...FONTS.h1,
                 }}
               >
-                ${newDummyData.portfolio.balance}
+                ${accountOne.portfolio.balance}
               </Text>
               <Text
                 style={{
@@ -135,7 +135,7 @@ const TransactionPage = ({ navigation }) => {
                   ...FONTS.body5,
                 }}
               >
-                +{newDummyData.portfolio.changes}% Last 24 hours
+                +{accountOne.portfolio.changes}% Last 24 hours
               </Text>
             </View>
             <View

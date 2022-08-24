@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Form, Input, Button } from "antd-mobile";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { COLORS, SIZES, FONTS } from "../constants/theme";
-import { newDummyData } from "../index";
-import { multiCoinStatus } from "../constants/newDummy";
+import { accountOne } from "../index";
+import { multiCoinStatus } from "../constants/accountOne";
 import SidePanel from "./components/SidePanel";
 
 const Withdraw = ({ route }) => {
@@ -19,21 +19,42 @@ const Withdraw = ({ route }) => {
     let temp2: number = +e2;
     temp1 =
       temp1 *
-      +newDummyData.multiCoinStatus[sequence.indexOf(currencyItem)].audPrice;
+      +accountOne.multiCoinStatus[sequence.indexOf(currencyItem)].audPrice;
     temp2 =
       temp2 *
-      +newDummyData.multiCoinStatus[sequence.indexOf(currencyItem)].audPrice;
+      +accountOne.multiCoinStatus[sequence.indexOf(currencyItem)].audPrice;
     if (temp1 == 0) temp1 = null;
     if (temp2 == 0) temp2 = null;
     setTransactionFeeAud(String(temp1));
     setSendAud(String(temp2));
     setCurrentCurrency("AUD");
   };
+  const onClickAveTransButton = (props) => {
+    let auValue = 0;
+    if (props == "low") {
+      auValue = 0.5;
+    }
+    if (props == "medium") {
+      auValue = 1.2;
+    }
+    if (props == "high") {
+      auValue = 2.5;
+    }
+    const rate =
+      accountOne.multiCoinStatus[sequence.indexOf(currencyItem)].audPrice;
+    const cryptoTrans = (auValue / rate).toFixed(8);
+    if (currentCurrency == "AUD") {
+      setTransactionFeeAud("1.17");
+    } else {
+      setTransactionFee(cryptoTrans);
+    }
+  };
+
   const onSendOut = () => {
     if (currentCurrency == "AUD") {
       const togetherAud = +transactionFeeAud + +sendAud;
       const currentDeposit =
-        +newDummyData.multiCoinStatus[sequence.indexOf(currencyItem)].AUD;
+        +accountOne.multiCoinStatus[sequence.indexOf(currencyItem)].audPrice;
       if (togetherAud <= currentDeposit) {
         console.log("Congratulations!");
         // Alert.alert("Congratulations!", "Money Send Out", [
@@ -48,7 +69,7 @@ const Withdraw = ({ route }) => {
     } else {
       const together = +transactionFee + +sendCrypto;
       const currentDeposit =
-        +newDummyData.multiCoinStatus[sequence.indexOf(currencyItem)].amount;
+        +accountOne.multiCoinStatus[sequence.indexOf(currencyItem)].amount;
       console.log(currentDeposit);
       if (together <= currentDeposit) {
         console.log("Congratulations!");
@@ -216,8 +237,11 @@ const Withdraw = ({ route }) => {
                 style={styles.buttonSmall}
                 size="small"
                 onClick={() => {
-                  alert("hello.");
+                  onClickAveTransButton("low");
                 }}
+                // onClick={() => {
+                //   alert("hello.");
+                // }}
               >
                 Low
               </Button>
@@ -230,8 +254,11 @@ const Withdraw = ({ route }) => {
                 style={styles.buttonSmall}
                 size="small"
                 onClick={() => {
-                  alert("hello.");
+                  onClickAveTransButton("medium");
                 }}
+                // onClick={() => {
+                //   alert("hello.");
+                // }}
               >
                 Medium
               </Button>
@@ -244,8 +271,11 @@ const Withdraw = ({ route }) => {
                 style={styles.buttonSmall}
                 size="small"
                 onClick={() => {
-                  alert("hello.");
+                  onClickAveTransButton("high");
                 }}
+                // onClick={() => {
+                //   alert("hello.");
+                // }}
               >
                 High
               </Button>

@@ -23,7 +23,6 @@ export const multiCoinStatus = [
     id: 1,
     description: "Bitcoin",
     amount: 0.1,
-    AUD: 1922.42,
     currency: "BTC",
     audPrice: 33702.48,
     currentPrice: "$19,224.20  -1.01%",
@@ -50,8 +49,7 @@ export const multiCoinStatus = [
     audPrice: 1.57,
     currentPrice: "$1.19  -1.23%",
     icon: require("../assets/CryptoIcons/nano.png"),
-    address:
-      "nano_3xcgdeqk6uoypf4t3cqgribqnfeq5szmx9o6iup1ngi5qnpacrbxbei6gekk",
+    address: "nano_3xcgdeqk6q5szmx9o6iup1ngi5qnpacrbxbei6gekk",
     QR: require("../assets/images/cryptoQR/nanoQR.png"),
   },
   {
@@ -78,10 +76,10 @@ export const multiCoinStatus = [
   },
 ];
 
-const newDummyData = {
+const accountOne = {
   portfolio,
   multiFunctions,
   multiCoinStatus,
 };
 
-export default newDummyData;
+export default accountOne;
