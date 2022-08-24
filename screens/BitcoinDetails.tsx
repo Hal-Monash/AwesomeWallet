@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   SafeAreaView,
@@ -13,12 +13,15 @@ import TransactionHistory from "../parts/TransactionHistory";
 import SidePanel from "./components/SidePanel";
 
 const BitcoinDetails = ({ route, navigation }) => {
-  const [selectedCurrency, setSelectedCurrency] = React.useState(null);
+  const sequence = ["BTC", "ETH", "XNO", "THETA", "XRP"];
 
-  React.useEffect(() => {
-    const { currencyItem } = route.params;
-    setSelectedCurrency(currencyItem);
-  }, []);
+  const { tokenList, setTokenList, currencyItem } = route.params;
+  const [selectedCurrency, setSelectedCurrency] = useState(tokenList);
+
+  // React.useEffect(() => {
+  //   const { tokenList, setTokenList, currencyItem } = route.params;
+  //   // setSelectedCurrency(currencyItem);
+  // }, []);
 
   function renderTrade() {
     return (
@@ -33,9 +36,12 @@ const BitcoinDetails = ({ route, navigation }) => {
         }}
       >
         <CurrencyLabel
-          icon={selectedCurrency?.icon}
-          currency={selectedCurrency?.description}
-          code={selectedCurrency?.currency}
+          // icon={selectedCurrency?.icon}
+          // currency={selectedCurrency?.description}
+          // code={selectedCurrency?.currency}
+          icon={currencyItem.icon}
+          currency={currencyItem.description}
+          code={currencyItem.currency}
         />
         <View
           style={{
@@ -46,18 +52,33 @@ const BitcoinDetails = ({ route, navigation }) => {
           }}
         >
           <Text style={{ ...FONTS.h2 }}>
-            {selectedCurrency?.amount} {selectedCurrency?.currency}
+            {/*{tokenList[sequence.indexOf(selectedCurrency?.currency)].amount}*/}
+            {/*{selectedCurrency?.amount}*/}
+            {/*{selectedCurrency?.currency}*/}
+            {selectedCurrency[sequence.indexOf(currencyItem.currency)].amount}
+            {currencyItem.currency}
           </Text>
           <Text style={{ color: COLORS.gray, ...FONTS.body4 }}>
-            ${" "}
-            {(selectedCurrency?.amount * selectedCurrency?.audPrice).toFixed(2)}
+            $ {/*{(*/}
+            {/*  tokenList[sequence.indexOf(selectedCurrency?.currency)].amount **/}
+            {/*  selectedCurrency?.audPrice*/}
+            {/*).toFixed(2)}*/}
+            {(
+              selectedCurrency[sequence.indexOf(currencyItem.currency)].amount *
+              currencyItem.audPrice
+            ).toFixed(2)}
           </Text>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("Send To", {
-                currencyItem: selectedCurrency?.currency,
+                // currencyItem: selectedCurrency?.currency,
+                currencyItem: currencyItem.currency,
+                tokenList: tokenList,
+                setTokenList: setTokenList,
+                tokenListTwo: selectedCurrency,
+                setTokenListTwo: setSelectedCurrency,
               })
             }
             style={[styles.button, { backgroundColor: "#023e3f" }]}
@@ -67,7 +88,8 @@ const BitcoinDetails = ({ route, navigation }) => {
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("Receive", {
-                currencyItem: selectedCurrency,
+                // currencyItem: selectedCurrency,
+                currencyItem: currencyItem,
               })
             }
             style={styles.button}

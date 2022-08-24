@@ -2,7 +2,12 @@ import React from "react";
 import { View, Text, FlatList, TouchableOpacity, Image } from "react-native";
 import { COLORS, SIZES, FONTS, icons } from "../index";
 
-const TokenList = ({ navigation, customContainerStyle, history }) => {
+const TokenList = ({
+  navigation,
+  customContainerStyle,
+  history,
+  changHistory,
+}) => {
   const findRightIcon = (item) => {
     if (item.currency.toString().toLowerCase() == "btc") {
       return icons.btc;
@@ -23,24 +28,45 @@ const TokenList = ({ navigation, customContainerStyle, history }) => {
   const choosePage = (item) => {
     if (item.currency.toString().toLowerCase() == "btc") {
       return () => {
-        navigation.navigate("BitcoinDetails", { currencyItem: item });
+        console.log(history);
+        navigation.navigate("BitcoinDetails", {
+          tokenList: history,
+          currencyItem: item,
+          setTokenList: changHistory,
+        });
       };
     }
     if (item.currency.toString().toLowerCase() == "eth") {
       return () =>
-        navigation.navigate("BitcoinDetails", { currencyItem: item });
+        navigation.navigate("BitcoinDetails", {
+          tokenList: history,
+          currencyItem: item,
+          setTokenList: changHistory,
+        });
     }
     if (item.currency.toString().toLowerCase() == "xno") {
       return () =>
-        navigation.navigate("BitcoinDetails", { currencyItem: item });
+        navigation.navigate("BitcoinDetails", {
+          tokenList: history,
+          currencyItem: item,
+          setTokenList: changHistory,
+        });
     }
     if (item.currency.toString().toLowerCase() == "theta") {
       return () =>
-        navigation.navigate("BitcoinDetails", { currencyItem: item });
+        navigation.navigate("BitcoinDetails", {
+          tokenList: history,
+          currencyItem: item,
+          setTokenList: changHistory,
+        });
     }
     if (item.currency.toString().toLowerCase() == "xrp") {
       return () =>
-        navigation.navigate("BitcoinDetails", { currencyItem: item });
+        navigation.navigate("BitcoinDetails", {
+          tokenList: history,
+          currencyItem: item,
+          setTokenList: changHistory,
+        });
     }
   };
 

@@ -16,7 +16,7 @@ import SidePanel from "./components/SidePanel";
 
 const TransactionPage = ({ navigation }) => {
   const [functions, setFunctions] = React.useState(accountOne.multiFunctions);
-  const [TokenLists, setTokenLists] = React.useState(
+  const [tokenLists, setTokenLists] = React.useState(
     accountOne.multiCoinStatus
   );
 
@@ -39,7 +39,11 @@ const TransactionPage = ({ navigation }) => {
           alignItems: "center",
         }}
         onPress={() =>
-          navigation.navigate("List", { currentItem: functions[index] })
+          navigation.navigate("List", {
+            currentItem: functions[index],
+            tokenList: tokenLists,
+            setTokenList: setTokenLists,
+          })
         }
       >
         {navigation.setOptions({ headerShown: false })}
@@ -166,7 +170,8 @@ const TransactionPage = ({ navigation }) => {
       <TokenList
         navigation={navigation}
         customContainerStyle={{ ...styles.shadow }}
-        history={TokenLists}
+        history={tokenLists}
+        changHistory={setTokenLists}
       />
     );
   }

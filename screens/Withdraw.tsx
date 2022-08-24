@@ -5,24 +5,25 @@ import { COLORS, SIZES, FONTS } from "../constants/theme";
 import { accountOne } from "../index";
 import { multiCoinStatus } from "../constants/accountOne";
 import SidePanel from "./components/SidePanel";
+import accountTwo from "../constants/accountTwo";
 
 const Withdraw = ({ route }) => {
+  const [recipientAddress, setRecipientAddress] = useState("");
   const [transactionFee, setTransactionFee] = useState("");
   const [transactionFeeAud, setTransactionFeeAud] = useState("");
   const [sendCrypto, setSendCrypto] = useState("");
   const [sendAud, setSendAud] = useState("");
   const { currencyItem } = route.params;
+  const { tokenList, setTokenList, tokenListTwo, setTokenListTwo } =
+    route.params;
   const [currentCurrency, setCurrentCurrency] = useState(currencyItem);
   const sequence = ["BTC", "ETH", "XNO", "THETA", "XRP"];
+
   const onTransToAud = (e1, e2) => {
     let temp1: number = +e1;
     let temp2: number = +e2;
-    temp1 =
-      temp1 *
-      +accountOne.multiCoinStatus[sequence.indexOf(currencyItem)].audPrice;
-    temp2 =
-      temp2 *
-      +accountOne.multiCoinStatus[sequence.indexOf(currencyItem)].audPrice;
+    temp1 = temp1 * +tokenList[sequence.indexOf(currencyItem)].audPrice;
+    temp2 = temp2 * +tokenList[sequence.indexOf(currencyItem)].audPrice;
     if (temp1 == 0) temp1 = null;
     if (temp2 == 0) temp2 = null;
     setTransactionFeeAud(String(temp1));
@@ -40,8 +41,8 @@ const Withdraw = ({ route }) => {
     if (props == "high") {
       auValue = 2.5;
     }
-    const rate =
-      accountOne.multiCoinStatus[sequence.indexOf(currencyItem)].audPrice;
+    console.log(tokenList);
+    const rate = tokenList[sequence.indexOf(currencyItem)].audPrice;
     const cryptoTrans = (auValue / rate).toFixed(8);
     if (currentCurrency == "AUD") {
       setTransactionFeeAud("1.17");
@@ -51,39 +52,58 @@ const Withdraw = ({ route }) => {
   };
 
   const onSendOut = () => {
+    let together = 0;
     if (currentCurrency == "AUD") {
+      console.log('currentCurrency == "AUD"');
       const togetherAud = +transactionFeeAud + +sendAud;
-      const currentDeposit =
-        +accountOne.multiCoinStatus[sequence.indexOf(currencyItem)].audPrice;
-      if (togetherAud <= currentDeposit) {
-        console.log("Congratulations!");
-        // Alert.alert("Congratulations!", "Money Send Out", [
-        //   { text: "OK", onPress: () => console.log("OK Pressed") },
-        // ]);
-      } else {
-        console.log("Failed!");
-        // Alert.alert("Transaction Failed!", "You dont have enough money", [
-        //   { text: "OK", onPress: () => console.log("OK Pressed") },
-        // ]);
-      }
+      const currentCurrency =
+        +tokenList[sequence.indexOf(currencyItem)].audPrice;
+      console.log(currentCurrency);
+      together = togetherAud / currentCurrency;
+      console.log(together);
     } else {
-      const together = +transactionFee + +sendCrypto;
-      const currentDeposit =
-        +accountOne.multiCoinStatus[sequence.indexOf(currencyItem)].amount;
-      console.log(currentDeposit);
-      if (together <= currentDeposit) {
-        console.log("Congratulations!");
-        // Alert.alert("Congratulations!", "Money Send Out", [
-        //   { text: "OK", onPress: () => console.log("OK Pressed") },
-        // ]);
-      } else {
-        console.log("Failed!");
-        // Alert.alert("Transaction Failed!", "You dont have enough money", [
-        //   { text: "OK", onPress: () => console.log("OK Pressed") },
-        // ]);
+      together = +transactionFee + +sendCrypto;
+      console.log(together);
+    }
+    const currentDeposit = +tokenList[sequence.indexOf(currencyItem)].amount;
+
+    if (together <= currentDeposit) {
+      setTokenList((prevList) => {
+        const index = sequence.indexOf(currencyItem);
+        return prevList.map((e, i) => {
+          if (i === index) {
+            return {
+              ...e,
+              amount: e.amount - together,
+            };
+          } else {
+            return e;
+          }
+        });
+      });
+      console.log(tokenListTwo);
+      if (tokenListTwo !== undefined) {
+        setTokenListTwo((prevList) => {
+          const index = sequence.indexOf(currencyItem);
+          return prevList.map((e, i) => {
+            if (i === index) {
+              return {
+                ...e,
+                amount: e.amount - together,
+              };
+            } else {
+              return e;
+            }
+          });
+        });
       }
+      alert("Congratulations, money send out successfully");
+    } else {
+      console.log("Failed!");
+      alert("Transaction Failed! Check your balance");
     }
   };
+
   const onTransToCrypto = (e) => {
     if (currentCurrency == "AUD") {
       let temp: number = +e;

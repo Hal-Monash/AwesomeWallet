@@ -8,6 +8,8 @@ import SidePanel from "./components/SidePanel";
 const CoinList = ({ route, navigation }) => {
   const dataToUse = accountOne.multiCoinStatus;
   const { currentItem } = route.params;
+  const { tokenList, setTokenList } = route.params;
+
   const getRowRenderer = () => {
     const navigationReceiveSelect = (item) => {
       return () =>
@@ -24,6 +26,8 @@ const CoinList = ({ route, navigation }) => {
       return () =>
         navigation.navigate("Send To", {
           currencyItem: item.toUpperCase(),
+          tokenList: tokenList,
+          setTokenList: setTokenList,
         });
     };
 
