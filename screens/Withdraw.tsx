@@ -59,10 +59,10 @@ const Withdraw = ({ route }) => {
       const currentCurrency =
         +tokenList[sequence.indexOf(currencyItem)].audPrice;
       console.log(currentCurrency);
-      together = togetherAud / currentCurrency;
+      together = +(togetherAud / currentCurrency).toFixed(8);
       console.log(together);
     } else {
-      together = +transactionFee + +sendCrypto;
+      together = +(+transactionFee + +sendCrypto).toFixed(8);
       console.log(together);
     }
     const currentDeposit = +tokenList[sequence.indexOf(currencyItem)].amount;
