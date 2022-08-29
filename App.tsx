@@ -26,7 +26,9 @@ const App = () => {
           name="PhonePage"
           component={PhonePage}
           options={{ headerShown: false }}
+          initialParams={{ key: "value" }}
         />
+
         <Stack.Screen
           name="Home"
           component={HomeScreen}

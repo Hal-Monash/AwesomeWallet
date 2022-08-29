@@ -5,6 +5,7 @@ import { StyleSheet } from "react-native";
 const PhonePage = ({ route, navigation }) => {
   const phase = route.params?.phase;
   const [iconChoice, setIconChoice] = useState(false);
+  const [copyText, setCopyText] = useState("");
   useEffect(() => {
     console.log(iconChoice);
     if (route.params != null) {
@@ -25,7 +26,9 @@ const PhonePage = ({ route, navigation }) => {
         {!iconChoice && (
           <TouchableOpacity
             style={styles.mail}
-            onPress={() => navigation.navigate("Mail Page")}
+            onPress={() =>
+              navigation.navigate("Mail Page", { mail: setCopyText })
+            }
           >
             <Image
               style={styles.mail}
@@ -35,7 +38,9 @@ const PhonePage = ({ route, navigation }) => {
         )}
         {!iconChoice && (
           <Text
-            onPress={() => navigation.navigate("Mail Page")}
+            onPress={() =>
+              navigation.navigate("Mail Page", { mail: setCopyText })
+            }
             style={styles.mailWord}
           >
             Mail

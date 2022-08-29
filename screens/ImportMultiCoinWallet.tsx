@@ -3,6 +3,7 @@ import { View, TextInput, StyleSheet } from "react-native";
 import SidePanel from "./components/SidePanel";
 
 const ImportMultiCoinWallet = ({ navigation }: any) => {
+  const [account, setAccount] = useState("");
   const arraysAreIdentical = (arr1, arr2) => {
     if (arr1.length !== arr2.length) return false;
     for (let i = 0, len = arr1.length; i < len; i++) {
@@ -38,13 +39,45 @@ const ImportMultiCoinWallet = ({ navigation }: any) => {
           "Intact",
           "Twenty",
           "Camera",
-
           // Mouse Believe Walnut Slave Sporadically Family Skin Lobster Friend Intact Twenty Camera
         ].map((element) => {
           return element.toUpperCase();
         })
       )
     ) {
+      setAccount("One");
+      navigation.navigate("Your Home Page");
+    }
+    if (
+      arraysAreIdentical(
+        seed
+          .split(/(\s+)/)
+          .filter(function (e) {
+            return e.trim().length > 0;
+          })
+          .map((element) => {
+            return element.toUpperCase();
+          }),
+        [
+          "friend",
+          "cart",
+          "leisure",
+          "idea",
+          "language",
+          "culture",
+          "zoo",
+          "torch",
+          "flight",
+          "ridge",
+          "movie",
+          "timber",
+          // friend cart leisure idea language culture zoo torch flight ridge movie timber
+        ].map((element) => {
+          return element.toUpperCase();
+        })
+      )
+    ) {
+      setAccount("Two");
       navigation.navigate("Your Home Page");
     } else {
     }
@@ -64,6 +97,11 @@ const ImportMultiCoinWallet = ({ navigation }: any) => {
           autoCorrect={false}
           onChangeText={onChangeSeed}
         />
+
+        {/*<View style={{ flex: 1 }}>*/}
+        {/*  <button>Paste</button>*/}
+        {/*</View>*/}
+
         <button
           style={{
             width: 320,

@@ -14,14 +14,8 @@ import SidePanel from "./components/SidePanel";
 
 const BitcoinDetails = ({ route, navigation }) => {
   const sequence = ["BTC", "ETH", "XNO", "THETA", "XRP"];
-
   const { tokenList, setTokenList, currencyItem } = route.params;
   const [selectedCurrency, setSelectedCurrency] = useState(tokenList);
-
-  // React.useEffect(() => {
-  //   const { tokenList, setTokenList, currencyItem } = route.params;
-  //   // setSelectedCurrency(currencyItem);
-  // }, []);
 
   function renderTrade() {
     return (
@@ -36,9 +30,6 @@ const BitcoinDetails = ({ route, navigation }) => {
         }}
       >
         <CurrencyLabel
-          // icon={selectedCurrency?.icon}
-          // currency={selectedCurrency?.description}
-          // code={selectedCurrency?.currency}
           icon={currencyItem.icon}
           currency={currencyItem.description}
           code={currencyItem.currency}
@@ -52,17 +43,10 @@ const BitcoinDetails = ({ route, navigation }) => {
           }}
         >
           <Text style={{ ...FONTS.h2 }}>
-            {/*{tokenList[sequence.indexOf(selectedCurrency?.currency)].amount}*/}
-            {/*{selectedCurrency?.amount}*/}
-            {/*{selectedCurrency?.currency}*/}
             {selectedCurrency[sequence.indexOf(currencyItem.currency)].amount}
             {currencyItem.currency}
           </Text>
           <Text style={{ color: COLORS.gray, ...FONTS.body4 }}>
-            $ {/*{(*/}
-            {/*  tokenList[sequence.indexOf(selectedCurrency?.currency)].amount **/}
-            {/*  selectedCurrency?.audPrice*/}
-            {/*).toFixed(2)}*/}
             {(
               selectedCurrency[sequence.indexOf(currencyItem.currency)].amount *
               currencyItem.audPrice
@@ -88,7 +72,6 @@ const BitcoinDetails = ({ route, navigation }) => {
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("Receive", {
-                // currencyItem: selectedCurrency,
                 currencyItem: currencyItem,
               })
             }

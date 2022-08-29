@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import { Form, Input, Button } from "antd-mobile";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 import { COLORS, SIZES, FONTS } from "../constants/theme";
 import { accountOne } from "../index";
 import { multiCoinStatus } from "../constants/accountOne";
 import SidePanel from "./components/SidePanel";
 import accountTwo from "../constants/accountTwo";
+import Clipboard from "@react-native-clipboard/clipboard";
+import _ from "lodash";
 
 const Withdraw = ({ route }) => {
   const [recipientAddress, setRecipientAddress] = useState("");
@@ -18,6 +26,18 @@ const Withdraw = ({ route }) => {
     route.params;
   const [currentCurrency, setCurrentCurrency] = useState(currencyItem);
   const sequence = ["BTC", "ETH", "XNO", "THETA", "XRP"];
+  const [copiedText, setCopiedText] = useState("");
+
+  const onPasteHandler = async () => {
+    const pasteText = await Clipboard.getString();
+    console.log(pasteText);
+    if (_.isEqual(pasteText, "0x9718E1E2A74bb8df78C9D9E61d8F1Ed89E66E25")) {
+      console.log("isEqual");
+      setRecipientAddress("0xe458EA2Fdee1c1D480CFD035c4dCFE02356ccdb2");
+    } else {
+      setRecipientAddress(pasteText);
+    }
+  };
 
   const onTransToAud = (e1, e2) => {
     let temp1: number = +e1;
@@ -140,11 +160,24 @@ const Withdraw = ({ route }) => {
             <Form.Item
               extra={
                 <div>
-                  <a>PASTE</a>
+                  <a onClick={() => onPasteHandler()}>PASTE</a>
                 </div>
               }
             >
-              <Input placeholder="Recipient Address" clearable />
+              <Input
+                placeholder="Recipient Address"
+                value={recipientAddress}
+                // onChange={(e) => setRecipientAddress(e)}
+                onChange={setRecipientAddress}
+                clearable
+              />
+              {/*<TextInput*/}
+              {/*  ref="inputRef"*/}
+              {/*  placeholder="Recipient Address"*/}
+              {/*  value={recipientAddress}*/}
+              {/*  onChangeText={setRecipientAddress}*/}
+              {/*  // clearable*/}
+              {/*/>*/}
             </Form.Item>
           </View>
           {currentCurrency != "AUD" && (
@@ -317,7 +350,7 @@ const Withdraw = ({ route }) => {
           </View>
         </Form>
       </View>
-      <SidePanel></SidePanel>
+      <SidePanel onCopySetter={setCopiedText}></SidePanel>
     </View>
   );
 };

@@ -13,7 +13,7 @@
     "@ant-design/react-native": "^5.0.0",
     "@babel/core": "^7.12.9",
     "@mui/icons-material": "^5.8.4",
-    "@react-native-clipboard/clipboard": "^1.10.0",
+    "@react-native-clipboard/clipboard": "^1.11.0",
     "@react-native-community/cameraroll": "^4.1.2",
     "@react-native-community/clipboard": "^1.5.1",
     "@react-native-community/segmented-control": "^2.2.2",
