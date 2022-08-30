@@ -15,6 +15,7 @@ import Receive from "./screens/Receive";
 import MailDetails from "./screens/Game Page/MailDetails";
 import PhonePage from "./screens/Game Page/PhonePage";
 import MailList from "./screens/Game Page/MailList";
+import test from "./screens/test";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,12 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        {/*<Stack.Screen*/}
+        {/*  name="test"*/}
+        {/*  component={test}*/}
+        {/*  options={{ headerShown: false }}*/}
+        {/*  initialParams={{ key: "value" }}*/}
+        {/*/>*/}
         <Stack.Screen
           name="PhonePage"
           component={PhonePage}

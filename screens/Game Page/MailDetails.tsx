@@ -10,6 +10,7 @@ import SidePanel from "../components/SidePanel";
 
 const MailDetails = ({ route, navigation }) => {
   const state = emailContent;
+  const page = 1;
 
   const senderInitial = () => {
     const from = state.mails[route.params.mailIndex]?.headers?.from;
@@ -188,7 +189,7 @@ const MailDetails = ({ route, navigation }) => {
           </View>
         </View>
       </View>
-      <SidePanel></SidePanel>
+      <SidePanel indexNumber={page}></SidePanel>
       {/*<SafeAreaView style={styles.ContainerTwo}>*/}
       {/*  <View style={styles.IconContainer}>*/}
       {/*    <MaterialCommunityIcons*/}

@@ -61,7 +61,7 @@ const YourPhrase = ({ navigation }: any) => {
           <Text style={{ fontWeight: "500" }}>Next</Text>
         </TouchableOpacity>
       </View>
-      <SidePanel></SidePanel>
+      <SidePanel indexNumber={1}></SidePanel>
     </View>
   );
 };

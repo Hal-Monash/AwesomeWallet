@@ -8,15 +8,36 @@ import {
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Clipboard from "@react-native-clipboard/clipboard";
-import GridImageView from "react-native-grid-image-viewer";
-import { Simulate } from "react-dom/test-utils";
-import { PersonAddAlt } from "@mui/icons-material";
 import Modal from "react-native-modal";
-
+import ImageView from "react-native-image-viewing";
+import GridImageView from "react-native-grid-image-viewer";
+import { ImageGallery } from "@georstat/react-native-image-gallery";
+import Gallery from "react-native-image-gallery";
+import { screenShots } from "../../constants/screenShots";
 const SidePanel = (props) => {
   const [isModalVisible, setModalVisible] = useState(false);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const openGallery = () => setIsOpen(true);
+  const closeGallery = () => setIsOpen(false);
+  const [images, setImages] = useState([
+    {
+      id: 1,
+      url: "https://images.unsplash.com/photo-1630149462161-2fe69fa964ee?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
+    },
+    {
+      id: 2,
+      url: "https://images.unsplash.com/photo-1630149462177-35a341b42fcf?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
+      thumbUrl: "",
+    },
+  ]);
+  const [indexNumber, setIndexNumber] = useState();
+  useEffect(() => setIndexNumber(props.indexNumber));
+
+  const onSnip = () =>
+    setImages((state) => [...state, screenShots[props.indexNumber]]);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -29,14 +50,18 @@ const SidePanel = (props) => {
 
   return (
     <SafeAreaView style={styles.ContainerTwo}>
-      <View style={styles.IconContainer}>
-        <MaterialCommunityIcons
-          name="cellphone-screenshot"
-          size={30}
-          color="#323232"
-        />
-        <View>Snipping</View>
-      </View>
+      {indexNumber && (
+        <TouchableOpacity onPress={onSnip}>
+          <View style={styles.IconContainer}>
+            <MaterialCommunityIcons
+              name="cellphone-screenshot"
+              size={30}
+              color="#323232"
+            />
+            <View>Snipping</View>
+          </View>
+        </TouchableOpacity>
+      )}
       <TouchableOpacity onPress={toggleModal}>
         <View style={styles.IconContainer}>
           <AntDesign name="folder1" size={30} color="#323232" />
@@ -54,7 +79,6 @@ const SidePanel = (props) => {
           <View>Copy</View>
         </View>
       </TouchableOpacity>
-
       <View style={styles.IconContainer}>
         <MaterialCommunityIcons name="notebook" size={30} color="#323232" />
         <View>Notebook</View>
@@ -64,12 +88,16 @@ const SidePanel = (props) => {
         <View>Next</View>
       </View>
       <View style={{ flex: 1 }}>
-        {/*<Button title="Show modal" onPress={toggleModal} />*/}
-
         <Modal isVisible={isModalVisible}>
           <View style={{ flex: 1 }}>
-            <Text>Hello!</Text>
-
+            <View>
+              <Button onPress={openGallery} title="Open Gallery" />
+              <ImageGallery
+                close={closeGallery}
+                isOpen={isOpen}
+                images={images}
+              />
+            </View>
             <Button title="Hide modal" onPress={toggleModal} />
           </View>
         </Modal>
