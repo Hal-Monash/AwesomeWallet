@@ -1,88 +1,31 @@
-import { SafeAreaView, StyleSheet, TouchableOpacity, View } from "react-native";
+import {
+  Button,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import React, { useRef, useState } from "react";
 import Clipboard from "@react-native-clipboard/clipboard";
+import GridImageView from "react-native-grid-image-viewer";
 import { Simulate } from "react-dom/test-utils";
+import { PersonAddAlt } from "@mui/icons-material";
+import Modal from "react-native-modal";
 
 const SidePanel = (props) => {
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
   const [copyText, setCopyText] = useState("");
   const copyToClipboard = () => {
     Clipboard.setString(window.getSelection().toString());
     setCopyText(window.getSelection().toString());
   };
-
-  // const addSymbol = (state) => {
-  //   if (state[type].length < 200) {
-  //     refs[type].focus();
-  //     let selection = refs[type]._lastNativeSelection || null;
-  //     let obj = {};
-  //     obj[type] = selection
-  //       ? state[type].substr(0, selection.start) +
-  //         symbol +
-  //         state[type].substr(selection.end)
-  //       : state[type] + symbol;
-  //     func({ ...obj }, () => {
-  //       refs[type].focus();
-  //       setTimeout(() => {
-  //         refs[type].setNativeProps({
-  //           selection: { start: selection.start + 1, end: selection.start + 1 },
-  //         });
-  //       });
-  //     });
-  //   }
-  // };
-
-  // const insertPaste = () => {
-  //   const textareaRef = useRef();
-  //   const cursorPosition = 0;
-  //
-  //   return (
-  //     <textarea
-  //       ref={textareaRef}
-  //       onBlur={() =>
-  //         textareaRef.current.setSelectionRange(cursorPosition, cursorPosition)
-  //       }
-  //     />
-  //   );
-  // };
-  // const insertString = (type, symbol) => {
-  //   const inputElement = useRef(null);
-  //   const handleFocusInput = () => {
-  //     inputElement.current.focus();
-  //   };
-  //   const selection = inputElement.;
-  // };
-  //   if (this.refs.FindingsDescribe.isFocused()) {
-  //     type = "FindingsDescribe";
-  //   } else if (this.refs.Conclusion.isFocused()) {
-  //     type = "Conclusion";
-  //   } else {
-  //     return;
-  //   }
-  //   // _lastNativeSelection:光标所在位置，若未初始化，则赋值为{start: 0, end: 0}
-  //   let selection = this.refs[type]._lastNativeSelection || {
-  //     start: 0,
-  //     end: 0,
-  //   };
-  //   let obj = {};
-  //   // 在光标位置处插入文字
-  //   obj[type] =
-  //     this.state[type].substr(0, selection.start) +
-  //     symbol +
-  //     this.state[type].substr(selection.end);
-  //   // 插入完成后把光标位置后移到恰当位置
-  //   this.setState({ ...obj }, () => {
-  //     setTimeout(() => {
-  //       this.refs[type].setNativeProps({
-  //         selection: {
-  //           start: selection.start + symbol.length,
-  //           end: selection.start + symbol.length,
-  //         },
-  //       });
-  //     });
-  //   });
-  // };
 
   return (
     <SafeAreaView style={styles.ContainerTwo}>
@@ -94,10 +37,13 @@ const SidePanel = (props) => {
         />
         <View>Snipping</View>
       </View>
-      <View style={styles.IconContainer}>
-        <AntDesign name="folder1" size={30} color="#323232" />
-        <View>Folder</View>
-      </View>
+      <TouchableOpacity onPress={toggleModal}>
+        <View style={styles.IconContainer}>
+          <AntDesign name="folder1" size={30} color="#323232" />
+          <View>Folder</View>
+        </View>
+      </TouchableOpacity>
+
       <TouchableOpacity onPress={copyToClipboard}>
         <View style={styles.IconContainer}>
           <MaterialCommunityIcons
@@ -109,21 +55,6 @@ const SidePanel = (props) => {
         </View>
       </TouchableOpacity>
 
-      {/*<TouchableOpacity*/}
-      {/*  onPress={(props) => {*/}
-      {/*    addSymbol(props);*/}
-      {/*  }}*/}
-      {/*>*/}
-      {/*  <View style={styles.IconContainer}>*/}
-      {/*    <MaterialCommunityIcons*/}
-      {/*      name="content-paste"*/}
-      {/*      size={30}*/}
-      {/*      color="#323232"*/}
-      {/*    />*/}
-      {/*    <View>Paste</View>*/}
-      {/*  </View>*/}
-      {/*</TouchableOpacity>*/}
-
       <View style={styles.IconContainer}>
         <MaterialCommunityIcons name="notebook" size={30} color="#323232" />
         <View>Notebook</View>
@@ -131,6 +62,17 @@ const SidePanel = (props) => {
       <View style={styles.IconContainer}>
         <MaterialCommunityIcons name="skip-next" size={30} color="#323232" />
         <View>Next</View>
+      </View>
+      <View style={{ flex: 1 }}>
+        {/*<Button title="Show modal" onPress={toggleModal} />*/}
+
+        <Modal isVisible={isModalVisible}>
+          <View style={{ flex: 1 }}>
+            <Text>Hello!</Text>
+
+            <Button title="Hide modal" onPress={toggleModal} />
+          </View>
+        </Modal>
       </View>
     </SafeAreaView>
   );
@@ -145,6 +87,25 @@ const styles = StyleSheet.create({
   ContainerOne: { width: "90%" },
   ContainerTwo: { width: "10%", backgroundColor: "#FAF0E6" },
   IconContainer: { fontSize: 10, marginTop: 80, alignItems: "center" },
+  background: {
+    backgroundColor: "black",
+    flex: 1,
+  },
+  headline_text: {
+    color: "white",
+    fontSize: 30,
+    fontWeight: "bold",
+    marginTop: 50,
+    marginLeft: 20,
+  },
+  explore_text: {
+    marginTop: 5,
+    marginBottom: 10,
+    color: "white",
+    marginLeft: 20,
+    fontSize: 12,
+    fontWeight: "600",
+  },
 });
 
 export default SidePanel;

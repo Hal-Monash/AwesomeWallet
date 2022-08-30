@@ -76,7 +76,7 @@ export const multiCoinStatus = [
   },
 ];
 
-const multiCoinStatusTwo = [
+export const multiCoinStatusTwo = [
   {
     id: 1,
     description: "Bitcoin",

@@ -1,17 +1,9 @@
 import React, { useState } from "react";
 import { Form, Input, Button } from "antd-mobile";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { COLORS, SIZES, FONTS } from "../constants/theme";
-import { accountOne } from "../index";
-import { multiCoinStatus } from "../constants/accountOne";
+
 import SidePanel from "./components/SidePanel";
-import accountTwo from "../constants/accountTwo";
 import Clipboard from "@react-native-clipboard/clipboard";
 import _ from "lodash";
 
@@ -171,13 +163,6 @@ const Withdraw = ({ route }) => {
                 onChange={setRecipientAddress}
                 clearable
               />
-              {/*<TextInput*/}
-              {/*  ref="inputRef"*/}
-              {/*  placeholder="Recipient Address"*/}
-              {/*  value={recipientAddress}*/}
-              {/*  onChangeText={setRecipientAddress}*/}
-              {/*  // clearable*/}
-              {/*/>*/}
             </Form.Item>
           </View>
           {currentCurrency != "AUD" && (
@@ -341,6 +326,9 @@ const Withdraw = ({ route }) => {
           <View>
             <Form.Item>
               <TouchableOpacity
+                disabled={
+                  !(recipientAddress && (transactionFee || transactionFeeAud))
+                }
                 onPress={() => onSendOut()}
                 style={[styles.button, { backgroundColor: "#023e3f" }]}
               >

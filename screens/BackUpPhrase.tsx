@@ -4,21 +4,22 @@ import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import PhraseBackup from "../parts/PhraseBackup";
 import SidePanel from "./components/SidePanel";
+import { accountOne } from "../index";
 
 const BackUpPhrase = ({ navigation }: any) => {
   const [data, setData] = useState([
-    "Mouse",
-    "Believe",
-    "Walnut",
-    "Slave",
-    "Sporadically",
-    "Family",
-    "Skin",
-    "Lobster",
-    "Friend",
-    "Intact",
-    "Twenty",
-    "Camera",
+    "Core",
+    "Medal",
+    "Test",
+    "Make",
+    "Kind",
+    "Noise",
+    "Dry",
+    "You",
+    "Lunch",
+    "Tomato",
+    "Bottom",
+    "Over",
   ]);
 
   useEffect(() => {
@@ -114,18 +115,18 @@ const BackUpPhrase = ({ navigation }: any) => {
         </View>
         <PhraseBackup selected={selected} data={data} onChange={onSelect} />
         {arraysAreIdentical(selected, [
-          "Mouse",
-          "Believe",
-          "Walnut",
-          "Slave",
-          "Sporadically",
-          "Family",
-          "Skin",
-          "Lobster",
-          "Friend",
-          "Intact",
-          "Twenty",
-          "Camera",
+          "Core",
+          "Medal",
+          "Test",
+          "Make",
+          "Kind",
+          "Noise",
+          "Dry",
+          "You",
+          "Lunch",
+          "Tomato",
+          "Bottom",
+          "Over",
         ]) && (
           <TouchableOpacity
             style={{
@@ -138,7 +139,11 @@ const BackUpPhrase = ({ navigation }: any) => {
               alignItems: "center",
               justifyContent: "center",
             }}
-            onPress={() => navigation.navigate("Your Home Page")}
+            onPress={() =>
+              navigation.navigate("Your Home Page", {
+                account: accountOne.multiCoinStatusTwo,
+              })
+            }
           >
             <Text style={{ fontWeight: "500" }}>Complete Backup</Text>
           </TouchableOpacity>

@@ -11,18 +11,18 @@ import SidePanel from "./components/SidePanel";
 
 const YourPhrase = ({ navigation }: any) => {
   const data = [
-    "Mouse",
-    "Believe",
-    "Walnut",
-    "Slave",
-    "Sporadically",
-    "Family",
-    "Skin",
-    "Lobster",
-    "Friend",
-    "Intact",
-    "Twenty",
-    "Camera",
+    "Core",
+    "Medal",
+    "Test",
+    "Make",
+    "Kind",
+    "Noise",
+    "Dry",
+    "You",
+    "Lunch",
+    "Tomato",
+    "Bottom",
+    "Over",
   ];
   const SCREEN_WIDTH = Dimensions.get("window").width;
   return (

@@ -14,12 +14,14 @@ import TokenList from "../parts/TokenList";
 import { accountOne, COLORS, SIZES, FONTS, icons, images } from "../index";
 import SidePanel from "./components/SidePanel";
 
-const TransactionPage = ({ navigation }) => {
+const TransactionPage = ({ route, navigation }) => {
+  // const [functions, setFunctions] = React.useState(accountOne.multiFunctions);
   const [functions, setFunctions] = React.useState(accountOne.multiFunctions);
-  const [tokenLists, setTokenLists] = React.useState(
-    accountOne.multiCoinStatus
-  );
-
+  // const [tokenLists, setTokenLists] = React.useState(
+  //   accountOne.multiCoinStatus
+  // );
+  const [tokenLists, setTokenLists] = React.useState(route.params.account);
+  console.log(tokenLists);
   React.useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
   }, []);

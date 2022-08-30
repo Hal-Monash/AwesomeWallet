@@ -1,6 +1,16 @@
 import React, { useState } from "react";
-import { View, TextInput, StyleSheet } from "react-native";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Button,
+  TouchableHighlight,
+  Dimensions,
+} from "react-native";
 import SidePanel from "./components/SidePanel";
+import { Form, Input } from "antd-mobile";
+import Clipboard from "@react-native-clipboard/clipboard";
+import { accountOne } from "../index";
 
 const ImportMultiCoinWallet = ({ navigation }: any) => {
   const [account, setAccount] = useState("");
@@ -13,8 +23,13 @@ const ImportMultiCoinWallet = ({ navigation }: any) => {
     }
     return true;
   };
+  const SCREEN_WIDTH = 0.75 * Dimensions.get("window").width;
 
   const [seed, onChangeSeed] = useState("");
+  const onPasteHandler = async () => {
+    const pasteText = await Clipboard.getString();
+    onChangeSeed(pasteText);
+  };
   const onHandleClick = () => {
     if (
       arraysAreIdentical(
@@ -46,7 +61,9 @@ const ImportMultiCoinWallet = ({ navigation }: any) => {
       )
     ) {
       setAccount("One");
-      navigation.navigate("Your Home Page");
+      navigation.navigate("Your Home Page", {
+        account: accountOne.multiCoinStatus,
+      });
     }
     if (
       arraysAreIdentical(
@@ -78,29 +95,63 @@ const ImportMultiCoinWallet = ({ navigation }: any) => {
       )
     ) {
       setAccount("Two");
-      navigation.navigate("Your Home Page");
+      navigation.navigate("Your Home Page", {
+        account: accountOne.multiCoinStatusTwo,
+      });
     } else {
     }
   };
   return (
     <View style={styles.twoColumnsContainer}>
       <View style={[styles.container, styles.ContainerOne]}>
-        <TextInput
-          value={seed}
-          multiline={true}
-          numberOfLines={3}
-          style={styles.seedPhrase}
-          placeholder="Input your phrase, separate with space"
-          blurOnSubmit
-          returnKeyType="next"
-          autoCapitalize="none"
-          autoCorrect={false}
-          onChangeText={onChangeSeed}
-        />
-
-        {/*<View style={{ flex: 1 }}>*/}
-        {/*  <button>Paste</button>*/}
-        {/*</View>*/}
+        <View
+          style={{
+            flexDirection: "row",
+            width: SCREEN_WIDTH,
+            // margin: 10,
+            // padding: 4,
+            alignItems: "center",
+            justifyContent: "center",
+            borderWidth: 4,
+            borderColor: "#888",
+            borderRadius: 10,
+            backgroundColor: "#fff",
+          }}
+        >
+          <View style={{ flex: 4 }}>
+            <TextInput
+              value={seed}
+              style={{
+                backgroundColor: "transparent",
+                width: "100%",
+                fontWeight: "400",
+                fontSize: 20,
+                minHeight: 150,
+                height: "auto",
+                fontFamily: "EuclidCircularB-Regular",
+                borderWidth: 0,
+                borderColor: "white",
+              }}
+              multiline={true}
+              numberOfLines={4}
+              placeholder="Input your phrase, separate with space"
+              blurOnSubmit
+              returnKeyType="next"
+              autoCapitalize="none"
+              autoCorrect={false}
+              onChangeText={onChangeSeed}
+            />
+          </View>
+          <View style={{ flex: 1 }}>
+            <TouchableHighlight
+              style={{ alignItems: "center", justifyContent: "center" }}
+              underlayColor="transparent"
+              onPress={onPasteHandler}
+            >
+              <View>Paste</View>
+            </TouchableHighlight>
+          </View>
+        </View>
 
         <button
           style={{
@@ -126,14 +177,10 @@ const styles = StyleSheet.create({
   twoColumnsContainer: {
     flex: 1,
     flexDirection: "row",
-    // // flexWrap: "wrap",
-    // // alignItems: "flex-start",
   },
   ContainerOne: {
     flex: 1,
     width: "90%",
-    // justifyContent: "center",
-    // alignItems: "center",
   },
   ContainerTwo: {
     flex: 1,
@@ -143,6 +190,9 @@ const styles = StyleSheet.create({
   },
   container: { top: 50, flex: 1, alignItems: "center" },
   seedPhrase: {
+    backgroundColor: "transparent",
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: 10,
     paddingTop: 20,
     paddingBottom: 20,
@@ -154,7 +204,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     fontFamily: "EuclidCircularB-Regular",
     fontWeight: "400",
-    alignItems: "center",
     flexDirection: "row",
     width: "80%",
   },
