@@ -16,7 +16,11 @@ const BitcoinDetails = ({ route, navigation }) => {
   const sequence = ["BTC", "ETH", "XNO", "THETA", "XRP"];
   const { tokenList, setTokenList, currencyItem } = route.params;
   const [selectedCurrency, setSelectedCurrency] = useState(tokenList);
-
+  const backToHome = () => {
+    navigation.navigate("PhonePage", {
+      readOrNot: true,
+    });
+  };
   function renderTrade() {
     return (
       <View
@@ -106,7 +110,7 @@ const BitcoinDetails = ({ route, navigation }) => {
           </View>
         </ScrollView>
       </SafeAreaView>
-      <SidePanel></SidePanel>
+      <SidePanel home={backToHome}></SidePanel>
     </View>
   );
 };

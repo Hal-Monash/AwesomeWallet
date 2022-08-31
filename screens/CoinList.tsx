@@ -65,7 +65,11 @@ const CoinList = ({ route, navigation }) => {
       );
     };
   };
-
+  const backToHome = () => {
+    navigation.navigate("PhonePage", {
+      readOrNot: true,
+    });
+  };
   return (
     <View style={styles.twoColumnsContainer}>
       <View style={styles.ContainerOne}>
@@ -84,7 +88,7 @@ const CoinList = ({ route, navigation }) => {
           </AutoSizer>
         </List>
       </View>
-      <SidePanel></SidePanel>
+      <SidePanel home={backToHome}></SidePanel>
     </View>
   );
 };

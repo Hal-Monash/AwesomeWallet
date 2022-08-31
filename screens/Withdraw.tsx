@@ -7,7 +7,7 @@ import SidePanel from "./components/SidePanel";
 import Clipboard from "@react-native-clipboard/clipboard";
 import _ from "lodash";
 
-const Withdraw = ({ route }) => {
+const Withdraw = ({ navigation, route }) => {
   const [recipientAddress, setRecipientAddress] = useState("");
   const [transactionFee, setTransactionFee] = useState("");
   const [transactionFeeAud, setTransactionFeeAud] = useState("");
@@ -131,7 +131,11 @@ const Withdraw = ({ route }) => {
       }
     }
   };
-
+  const backToHome = () => {
+    navigation.navigate("PhonePage", {
+      readOrNot: true,
+    });
+  };
   return (
     <View style={styles.twoColumnsContainer}>
       <View
@@ -338,7 +342,7 @@ const Withdraw = ({ route }) => {
           </View>
         </Form>
       </View>
-      <SidePanel onCopySetter={setCopiedText}></SidePanel>
+      <SidePanel onCopySetter={setCopiedText} home={backToHome}></SidePanel>
     </View>
   );
 };

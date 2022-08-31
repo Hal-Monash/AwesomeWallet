@@ -24,6 +24,11 @@ const YourPhrase = ({ navigation }: any) => {
     "Bottom",
     "Over",
   ];
+  const backToHome = () => {
+    navigation.navigate("PhonePage", {
+      readOrNot: true,
+    });
+  };
   const SCREEN_WIDTH = Dimensions.get("window").width;
   return (
     <View style={styles.twoColumnsContainer}>
@@ -61,7 +66,7 @@ const YourPhrase = ({ navigation }: any) => {
           <Text style={{ fontWeight: "500" }}>Next</Text>
         </TouchableOpacity>
       </View>
-      <SidePanel indexNumber={1}></SidePanel>
+      <SidePanel indexNumber={1} home={backToHome}></SidePanel>
     </View>
   );
 };

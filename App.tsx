@@ -17,6 +17,7 @@ import PhonePage from "./screens/Game Page/PhonePage";
 import MailList from "./screens/Game Page/MailList";
 import test from "./screens/test";
 import Notebook from "./screens/components/Notebook";
+import sidePanel from "./screens/components/SidePanel";
 
 const Stack = createNativeStackNavigator();
 
@@ -40,8 +41,13 @@ const App = () => {
           name="PhonePage"
           component={PhonePage}
           options={{ headerShown: false }}
-          initialParams={{ key: "value" }}
+          // initialParams={{ key: "value" }}
         />
+        {/*<Stack.Screen*/}
+        {/*  name="sidePanel"*/}
+        {/*  component={sidePanel}*/}
+        {/*  options={{ headerShown: false }}*/}
+        {/*/>*/}
 
         <Stack.Screen
           name="Home"

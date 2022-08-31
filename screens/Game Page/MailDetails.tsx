@@ -7,6 +7,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import { StyleSheet } from "react-native";
 import { emailContent } from "../../constants/emailContent";
 import SidePanel from "../components/SidePanel";
+import phonePage from "./PhonePage";
 
 const MailDetails = ({ route, navigation }) => {
   const state = emailContent;
@@ -16,7 +17,11 @@ const MailDetails = ({ route, navigation }) => {
     const from = state.mails[route.params.mailIndex]?.headers?.from;
     return from[0];
   };
-
+  const backToHome = () => {
+    navigation.navigate("PhonePage", {
+      readOrNot: true,
+    });
+  };
   const generateColor = () => {
     let color = Math.floor(Math.random() * 16777215).toString(16);
     if (color === "ffffff") {
@@ -189,7 +194,7 @@ const MailDetails = ({ route, navigation }) => {
           </View>
         </View>
       </View>
-      <SidePanel indexNumber={page}></SidePanel>
+      <SidePanel indexNumber={page} home={backToHome}></SidePanel>
       {/*<SafeAreaView style={styles.ContainerTwo}>*/}
       {/*  <View style={styles.IconContainer}>*/}
       {/*    <MaterialCommunityIcons*/}

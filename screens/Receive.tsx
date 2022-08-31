@@ -4,9 +4,13 @@ import { List, Image } from "antd-mobile";
 import { COLORS, SIZES, FONTS } from "../constants/theme";
 import SidePanel from "./components/SidePanel";
 
-const Receive = ({ route }) => {
+const Receive = ({ navigation, route }) => {
   const { currencyItem } = route.params;
-
+  const backToHome = () => {
+    navigation.navigate("PhonePage", {
+      readOrNot: true,
+    });
+  };
   return (
     <View style={styles.twoColumnsContainer}>
       <View style={styles.ContainerOne}>
@@ -68,7 +72,7 @@ const Receive = ({ route }) => {
           </View>
         </View>
       </View>
-      <SidePanel></SidePanel>
+      <SidePanel home={backToHome}></SidePanel>
     </View>
   );
 };

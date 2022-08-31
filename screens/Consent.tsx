@@ -17,7 +17,11 @@ const Consent = ({ navigation }: any) => {
   const checkboxHandlerThree = () => {
     setAgreeThree(!agreeThree);
   };
-
+  const backToHome = () => {
+    navigation.navigate("PhonePage", {
+      readOrNot: true,
+    });
+  };
   return (
     <View style={styles.twoColumnsContainer}>
       <View style={styles.container}>
@@ -75,7 +79,7 @@ const Consent = ({ navigation }: any) => {
           </button>
         </View>
       </View>
-      <SidePanel></SidePanel>
+      <SidePanel home={backToHome}></SidePanel>
     </View>
   );
 };

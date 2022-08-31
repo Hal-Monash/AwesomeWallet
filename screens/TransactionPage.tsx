@@ -13,9 +13,14 @@ import {
 import TokenList from "../parts/TokenList";
 import { accountOne, COLORS, SIZES, FONTS, icons, images } from "../index";
 import SidePanel from "./components/SidePanel";
+import { createStore } from "state-pool";
 
 const TransactionPage = ({ route, navigation }) => {
+  const store = createStore();
+  const [logStatus, setLogStatus, updateLogStatus] =
+    store.useState("accountLogged");
   // const [functions, setFunctions] = React.useState(accountOne.multiFunctions);
+
   const [functions, setFunctions] = React.useState(accountOne.multiFunctions);
   // const [tokenLists, setTokenLists] = React.useState(
   //   accountOne.multiCoinStatus
@@ -24,6 +29,7 @@ const TransactionPage = ({ route, navigation }) => {
   console.log(tokenLists);
   React.useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+    setLogStatus(tokenLists);
   }, []);
 
   function renderHeader() {

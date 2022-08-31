@@ -21,7 +21,11 @@ const MailList = ({ navigation, route }) => {
   const handleDrawer = () => {
     navigation?.openDrawer();
   };
-
+  const backToHome = () => {
+    navigation.navigate("PhonePage", {
+      readOrNot: true,
+    });
+  };
   // const handleNavigation = (screen, params) => {
   //   navigation.navigate(getScreenParent(screen), screen, params);
   // };
@@ -122,7 +126,7 @@ const MailList = ({ navigation, route }) => {
         </View>
         <BottomTab toggleDrawer={undefined} />
       </View>
-      <SidePanel />
+      <SidePanel home={backToHome} />
     </View>
   );
 };

@@ -18,8 +18,9 @@ import Gallery from "react-native-image-gallery";
 import { screenShots } from "../../constants/screenShots";
 import Notebook from "../components/Notebook";
 import { store } from "../../constants/note";
+import { accountOne } from "../../index";
 
-const SidePanel = (props) => {
+const SidePanel = (props, { navigation }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [isNoteModalVisible, setNoteModalVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -84,6 +85,13 @@ const SidePanel = (props) => {
         <View style={styles.IconContainer}>
           <MaterialCommunityIcons name="notebook" size={30} color="#323232" />
           <View>Notebook</View>
+        </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={props.home}>
+        <View style={styles.IconContainer}>
+          <MaterialCommunityIcons name="home" size={30} color="#323232" />
+          <View>Home</View>
         </View>
       </TouchableOpacity>
 

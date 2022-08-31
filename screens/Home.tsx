@@ -17,7 +17,11 @@ import SidePanel from "./components/SidePanel";
 const Home = ({ navigation }) => {
   const [sliderState, setSliderState] = useState({ currentPage: 0 });
   const { width, height } = Dimensions.get("window");
-
+  const backToHome = () => {
+    navigation.navigate("PhonePage", {
+      readOrNot: true,
+    });
+  };
   const setSliderPage = (event: any) => {
     const { currentPage } = sliderState;
     const { x } = event.nativeEvent.contentOffset;
@@ -132,7 +136,7 @@ const Home = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </SafeAreaView>
-      <SidePanel></SidePanel>
+      <SidePanel home={backToHome}></SidePanel>
     </View>
   );
 };

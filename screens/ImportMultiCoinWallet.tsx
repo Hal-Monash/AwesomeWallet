@@ -30,6 +30,11 @@ const ImportMultiCoinWallet = ({ navigation }: any) => {
     const pasteText = await Clipboard.getString();
     onChangeSeed(pasteText);
   };
+  const backToHome = () => {
+    navigation.navigate("PhonePage", {
+      readOrNot: true,
+    });
+  };
   const onHandleClick = () => {
     if (
       arraysAreIdentical(
@@ -169,7 +174,7 @@ const ImportMultiCoinWallet = ({ navigation }: any) => {
           Submit
         </button>
       </View>
-      <SidePanel></SidePanel>
+      <SidePanel home={backToHome}></SidePanel>
     </View>
   );
 };

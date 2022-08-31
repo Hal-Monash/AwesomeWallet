@@ -21,7 +21,11 @@ const BackUpPhrase = ({ navigation }: any) => {
     "Bottom",
     "Over",
   ]);
-
+  const backToHome = () => {
+    navigation.navigate("PhonePage", {
+      readOrNot: true,
+    });
+  };
   useEffect(() => {
     const tempArr = [];
     const randomiseArray = (array) => {
@@ -149,7 +153,7 @@ const BackUpPhrase = ({ navigation }: any) => {
           </TouchableOpacity>
         )}
       </View>
-      <SidePanel></SidePanel>
+      <SidePanel home={backToHome}></SidePanel>
     </View>
   );
 };

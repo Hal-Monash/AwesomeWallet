@@ -20,12 +20,4 @@ store.setState("images", [
     thumbUrl: "",
   },
 ]);
-// const note = () => {
-//   const [note, setNote] = useState([
-//     {
-//       id: 1,
-//       title: "This is an example of title",
-//       content: "This is an example of content",
-//     },
-//   ]);
-// };
+store.setState("accountLogged", "");
