@@ -16,6 +16,7 @@ import MailDetails from "./screens/Game Page/MailDetails";
 import PhonePage from "./screens/Game Page/PhonePage";
 import MailList from "./screens/Game Page/MailList";
 import test from "./screens/test";
+import Notebook from "./screens/components/Notebook";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,12 @@ const App = () => {
         {/*<Stack.Screen*/}
         {/*  name="test"*/}
         {/*  component={test}*/}
+        {/*  options={{ headerShown: false }}*/}
+        {/*  initialParams={{ key: "value" }}*/}
+        {/*/>*/}
+        {/*<Stack.Screen*/}
+        {/*  name="test"*/}
+        {/*  component={Notebook}*/}
         {/*  options={{ headerShown: false }}*/}
         {/*  initialParams={{ key: "value" }}*/}
         {/*/>*/}

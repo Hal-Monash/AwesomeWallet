@@ -16,12 +16,15 @@ import GridImageView from "react-native-grid-image-viewer";
 import { ImageGallery } from "@georstat/react-native-image-gallery";
 import Gallery from "react-native-image-gallery";
 import { screenShots } from "../../constants/screenShots";
+import Notebook from "../components/Notebook";
+
 const SidePanel = (props) => {
   const [isModalVisible, setModalVisible] = useState(false);
-
+  const [isNoteModalVisible, setNoteModalVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const openGallery = () => setIsOpen(true);
   const closeGallery = () => setIsOpen(false);
+
   const [images, setImages] = useState([
     {
       id: 1,
@@ -42,6 +45,10 @@ const SidePanel = (props) => {
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
+  const toggleNoteModal = () => {
+    setNoteModalVisible(!isModalVisible);
+  };
+
   const [copyText, setCopyText] = useState("");
   const copyToClipboard = () => {
     Clipboard.setString(window.getSelection().toString());
@@ -79,10 +86,14 @@ const SidePanel = (props) => {
           <View>Copy</View>
         </View>
       </TouchableOpacity>
-      <View style={styles.IconContainer}>
-        <MaterialCommunityIcons name="notebook" size={30} color="#323232" />
-        <View>Notebook</View>
-      </View>
+
+      <TouchableOpacity onPress={toggleNoteModal}>
+        <View style={styles.IconContainer}>
+          <MaterialCommunityIcons name="notebook" size={30} color="#323232" />
+          <View>Notebook</View>
+        </View>
+      </TouchableOpacity>
+
       <View style={styles.IconContainer}>
         <MaterialCommunityIcons name="skip-next" size={30} color="#323232" />
         <View>Next</View>
@@ -99,6 +110,14 @@ const SidePanel = (props) => {
               />
             </View>
             <Button title="Hide modal" onPress={toggleModal} />
+          </View>
+        </Modal>
+      </View>
+      <View style={{ flex: 1 }}>
+        <Modal isVisible={isNoteModalVisible}>
+          <View style={{ flex: 1 }}>
+            <Notebook></Notebook>
+            <Button title="Hide modal" onPress={toggleNoteModal} />
           </View>
         </Modal>
       </View>
