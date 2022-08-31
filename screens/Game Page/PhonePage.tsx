@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, Image, Dimensions } from "react-native";
 import { StyleSheet } from "react-native";
+import { createStore } from "state-pool";
 
 const PhonePage = ({ route, navigation }) => {
   const phase = route.params?.phase;
   const [iconChoice, setIconChoice] = useState(false);
   const [copyText, setCopyText] = useState("");
+  const store = createStore();
+  const [logStatus, setLogStatus, updateLogStatus] =
+    store.useState("accountLogged");
+
   useEffect(() => {
     console.log(iconChoice);
     if (route.params != null) {
@@ -49,8 +54,8 @@ const PhonePage = ({ route, navigation }) => {
         {iconChoice && (
           <TouchableOpacity
             style={styles.mail}
-            // onPress={() => navigation.navigate("Mail Page")}
-            onPress={() => navigation.navigate("MailList")}
+            onPress={() => navigation.navigate("Mail Page")}
+            // onPress={() => navigation.navigate("MailList")}
           >
             <Image
               style={styles.mail}
@@ -60,7 +65,8 @@ const PhonePage = ({ route, navigation }) => {
         )}
         {iconChoice && (
           <Text
-            onPress={() => navigation.navigate("MailList")}
+            // onPress={() => navigation.navigate("MailList")}
+            onPress={() => navigation.navigate("Mail Page")}
             style={styles.mailWord}
           >
             Mail
