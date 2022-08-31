@@ -14,9 +14,10 @@ import TokenList from "../parts/TokenList";
 import { accountOne, COLORS, SIZES, FONTS, icons, images } from "../index";
 import SidePanel from "./components/SidePanel";
 import { createStore } from "state-pool";
+import { store } from "../constants/note";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const TransactionPage = ({ route, navigation }) => {
-  const store = createStore();
   const [logStatus, setLogStatus, updateLogStatus] =
     store.useState("accountLogged");
   // const [functions, setFunctions] = React.useState(accountOne.multiFunctions);
@@ -183,6 +184,18 @@ const TransactionPage = ({ route, navigation }) => {
       />
     );
   }
+  const backToHome = () => {
+    navigation.navigate("PhonePage", {
+      readOrNot: true,
+    });
+  };
+
+  const logOut = () => {
+    navigation.navigate("PhonePage", {
+      readOrNot: true,
+    });
+    setLogStatus("");
+  };
   return (
     <View style={styles.twoColumnsContainer}>
       <View style={styles.ContainerOne}>
@@ -192,8 +205,15 @@ const TransactionPage = ({ route, navigation }) => {
             {renderTokenList()}
           </View>
         </ScrollView>
+        <TouchableOpacity onPress={logOut}>
+          <View>
+            <MaterialCommunityIcons name="logout" size={30} color="#323232" />
+            <View>Log Out</View>
+          </View>
+        </TouchableOpacity>
       </View>
-      <SidePanel></SidePanel>
+
+      <SidePanel home={backToHome}></SidePanel>
     </View>
   );
 };

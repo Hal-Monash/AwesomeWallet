@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, Image, Dimensions } from "react-native";
 import { StyleSheet } from "react-native";
 import { createStore } from "state-pool";
-
+import { store } from "../../constants/note";
 const PhonePage = ({ route, navigation }) => {
   const phase = route.params?.phase;
   const [iconChoice, setIconChoice] = useState(false);
   const [copyText, setCopyText] = useState("");
-  const store = createStore();
+
   const [logStatus, setLogStatus, updateLogStatus] =
     store.useState("accountLogged");
 
@@ -73,23 +73,50 @@ const PhonePage = ({ route, navigation }) => {
           </Text>
         )}
       </View>
-      <TouchableOpacity
-        style={styles.market}
-        // onPress={() => navigation.navigate("Send To", { currencyItem: "BTC" })}
-        onPress={() => navigation.navigate("Home")}
-      >
-        <Image
-          style={styles.mail}
-          source={require("../../assets/images/coinWallet.png")}
-        />
-      </TouchableOpacity>
 
-      <Text
-        onPress={() => navigation.navigate("Home")}
-        style={styles.walletWord}
-      >
-        Wallet
-      </Text>
+      {typeof logStatus === "string" && logStatus.length === 0 ? (
+        <TouchableOpacity
+          style={styles.market}
+          // onPress={() => navigation.navigate("Send To", { currencyItem: "BTC" })}
+          onPress={() => navigation.navigate("Home")}
+        >
+          <Image
+            style={styles.mail}
+            source={require("../../assets/images/coinWallet.png")}
+          />
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          style={styles.market}
+          // onPress={() => navigation.navigate("Send To", { currencyItem: "BTC" })}
+          onPress={() =>
+            navigation.navigate("Your Home Page", { account: logStatus })
+          }
+        >
+          <Image
+            style={styles.mail}
+            source={require("../../assets/images/coinWallet.png")}
+          />
+        </TouchableOpacity>
+      )}
+
+      {typeof logStatus === "string" && logStatus.length === 0 ? (
+        <Text
+          onPress={() => navigation.navigate("Home")}
+          style={styles.walletWord}
+        >
+          Wallet
+        </Text>
+      ) : (
+        <Text
+          onPress={() =>
+            navigation.navigate("Your Home Page", { account: logStatus })
+          }
+          style={styles.walletWord}
+        >
+          Wallet
+        </Text>
+      )}
     </View>
   );
 };
