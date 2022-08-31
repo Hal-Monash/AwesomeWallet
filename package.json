@@ -49,6 +49,7 @@
     "react-native-webview": "^11.23.0",
     "react-virtualized": "^9.22.3",
     "shortid": "^2.2.16",
+    "state-pool": "^0.7.1",
     "styled-components": "^5.3.5",
     "typescript": "^4.3.5",
     "victory-native": "^36.5.3"

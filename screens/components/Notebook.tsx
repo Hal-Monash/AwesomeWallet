@@ -1,31 +1,32 @@
 import React, { useState } from "react";
 import { TextInput, View } from "react-native";
-import { note } from "../../constants/note";
+import { store } from "../../constants/note";
 import { Form, Button } from "antd-mobile";
 import Clipboard from "@react-native-clipboard/clipboard";
 const Notebook = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [notes, setNotes] = useState(note);
+  const [notes, setNotes, updateNotes] = store.useState("note");
   const onSubHandler = () => {
-    setNotes((prevState) => [
-      ...prevState,
-      { id: note.length + 1, title: title, content: content },
-    ]);
+    setNotes(
+      notes.concat({ id: notes.length + 1, title: title, content: content })
+    );
+    setTitle("");
+    setContent("");
   };
-
+  console.log(notes);
   const submissions = () => {
     return notes.map((note) => (
       <View>
-        <View>{note.id}</View>
-        <View>{note.title}</View>
-        <View>{note.content}</View>
+        <View>No {note.id}</View>
+        <View>Title: {note.title}</View>
+        <View>Note Content: {note.content}</View>
       </View>
     ));
   };
 
   return (
-    <View>
+    <View style={{ backgroundColor: "white" }}>
       {submissions()}
       <TextInput
         placeholder={"Input The Title Of Your Note"}
@@ -41,7 +42,9 @@ const Notebook = () => {
           setContent(e);
         }}
       />
-      <Button onClick={onSubHandler}>Submit</Button>
+      <Button disabled={!(content && title)} onClick={onSubHandler}>
+        Submit
+      </Button>
     </View>
   );
 };

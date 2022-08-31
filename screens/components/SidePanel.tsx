@@ -17,6 +17,7 @@ import { ImageGallery } from "@georstat/react-native-image-gallery";
 import Gallery from "react-native-image-gallery";
 import { screenShots } from "../../constants/screenShots";
 import Notebook from "../components/Notebook";
+import { store } from "../../constants/note";
 
 const SidePanel = (props) => {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -24,29 +25,21 @@ const SidePanel = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const openGallery = () => setIsOpen(true);
   const closeGallery = () => setIsOpen(false);
+  const [images, setImages, updateNotes] = store.useState("images");
 
-  const [images, setImages] = useState([
-    {
-      id: 1,
-      url: "https://images.unsplash.com/photo-1630149462161-2fe69fa964ee?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-    },
-    {
-      id: 2,
-      url: "https://images.unsplash.com/photo-1630149462177-35a341b42fcf?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-      thumbUrl: "",
-    },
-  ]);
   const [indexNumber, setIndexNumber] = useState();
   useEffect(() => setIndexNumber(props.indexNumber));
 
-  const onSnip = () =>
-    setImages((state) => [...state, screenShots[props.indexNumber]]);
+  // const onSnip = () =>
+  //   setImages((state) => [...state, screenShots[props.indexNumber]]);
+
+  const onSnip = () => setImages(images.concat(screenShots[props.indexNumber]));
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
   const toggleNoteModal = () => {
-    setNoteModalVisible(!isModalVisible);
+    setNoteModalVisible(!isNoteModalVisible);
   };
 
   const [copyText, setCopyText] = useState("");

@@ -4427,6 +4427,11 @@ image-size@^0.6.0:
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.6.3.tgz#e7e5c65bb534bd7cdcedd6cb5166272a85f75fb2"
   integrity sha512-47xSUiQioGaB96nqtp5/q55m0aBQSQdyIloMOc/x+QVTDZLNmXE892IIDrJ0hM1A5vcNUDD5tDffkSP5lCaIIA==
 
+immer@>=6.0.3:
+  version "9.0.15"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-9.0.15.tgz#0b9169e5b1d22137aba7d43f8a81a495dd1b62dc"
+  integrity sha512-2eB/sswms9AEUSkOm4SbV5Y7Vmt/bKRwByd52jfLkW4OLYeaTP3EEiJ9agqU0O/tq6Dk62Zfj+TJSqfm1rLVGQ==
+
 import-fresh@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/import-fresh/-/import-fresh-2.0.0.tgz#d81355c15612d386c61f9ddd3922d4304822a546"
@@ -7138,6 +7143,13 @@ staged-components@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/staged-components/-/staged-components-1.1.3.tgz#bb5a396df2d9b48fbc31841a59f53437ed8b8ac6"
   integrity sha512-9EIswzDqjwlEu+ymkV09TTlJfzSbKgEnNteUnZSTxkpMgr5Wx2CzzA9WcMFWBNCldqVPsHVnRGGrApduq2Se5A==
+
+state-pool@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/state-pool/-/state-pool-0.7.1.tgz#a46a4fe10ff405c99a2bd27d2dcbc5942cb3cfb0"
+  integrity sha512-216KQC0Aos0q9VHQUzgJtCntFk2gSXgXs36aDJ9iCFswieKPf9o55wwDH2fdl9H2MM1CUfdv32cSLgv2mBBpMQ==
+  dependencies:
+    immer ">=6.0.3"
 
 static-extend@^0.1.1:
   version "0.1.2"
